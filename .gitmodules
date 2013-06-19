@@ -1,0 +1,3 @@
+[submodule "public/shower"]
+	path = public/shower
+	url = https://github.com/artpolikarpov/shower.git
