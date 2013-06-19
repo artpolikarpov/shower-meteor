@@ -1,0 +1,30 @@
+<head>
+  <title>Shower TV</title>
+  <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+  {{> body}}
+</body>
+
+<template name="body">
+	{{#if Session 'keynoteShow'}}
+		{{> keynoteShow}}
+	{{else}}
+		<div class="container">
+			{{loginButtons}}
+
+			{{#if currentUser}}
+				{{#if Session 'keynoteEdit'}}
+					{{> keynoteEdit}}
+				{{else}}
+					{{> keynotesList}}
+				{{/if}}
+			{{else}}
+				<div>
+					[Welcome text]
+				</div>
+			{{/if}}
+	  </div>
+	{{/if}}
+</template>

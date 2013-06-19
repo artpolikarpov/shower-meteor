@@ -1,0 +1,30 @@
+<template name="keynoteEdit">
+	{{#with keynote}}
+		<div>
+			<button class="btn js-back"><i class="icon-chevron-left"></i> All keynotes</button>
+		</div>
+
+		<div>
+			keynoteEdit: {{_id}}
+		</div>
+
+		<form>
+			<div class="control-group">
+				<textarea name="code" cols="30" rows="10"  id="code">{{code}}</textarea>
+			</div>
+
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">Save changes</button>
+			</div>
+		</form>
+
+		<div>
+			<button class="btn js-remove"><i class="icon-remove"></i> Remove</button>
+		</div>
+	{{else}}
+		<div>
+			[Nothing found]
+		</div>
+	{{/with}}
+</template>

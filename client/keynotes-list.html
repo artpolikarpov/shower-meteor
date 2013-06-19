@@ -1,0 +1,30 @@
+<template name="keynotesList">
+	<div>
+		<button class="btn js-new"><i class="icon-plus"></i> New keynote</button>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>id</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each keynotes}}
+				<tr>
+					<td>{{_id}}</td>
+					<td>{{id}}</td>
+					<td>
+						<button class="btn js-edit"><i class="icon-edit"></i> Edit...</button>
+					</td>
+				</tr>
+			{{else}}
+				<tr>
+					<td colspan="3">[Nothing found]</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</template>
