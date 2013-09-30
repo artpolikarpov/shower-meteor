@@ -1,30 +1,71 @@
 <template name="keynoteEdit">
 	{{#with keynote}}
-		<div>
-			<button class="btn js-back"><i class="icon-chevron-left"></i> All keynotes</button>
-		</div>
+    <div class="color-line color-line-{{show}}"></div>
 
-		<div>
-			keynoteEdit: {{_id}}
-		</div>
-
-		<form>
-			<div class="control-group">
-				<textarea name="code" cols="30" rows="10"  id="code">{{code}}</textarea>
+		<form role="form" class="keynote-edit">
+			<div class="form-group">
+        <label for="title" class="control-label">Presentation Title</label>
+        <input id="title" type="text" class="form-control input-lg" name="title" value="{{title}}" />
+			</div>
+      <div class="form-group">
+        <label for="tagline" class="control-label">Tagline</label>
+        <input id="tagline" type="text" class="form-control" name="tagline" value="{{tagline}}" />
 			</div>
 
+      <div class="form-group {{Session 'keynoteURLState'}}">
+        <label for="url" class="control-label">Permalink</label>
+        <div class="input-group">
+          <label for="url" class="input-group-addon">http://shwr.tv/</label>
+          <input id="url" type="text" class="form-control" name="url" value="{{url}}" />
+        </div>
+			</div>
 
-			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Save changes</button>
+      <div class="form-group">
+        <label for="show" class="control-label">Visibility</label>
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
+            <select id="show" name="show" class="form-control">
+              {{#each showOptions}}
+                <option value="{{value}}" {{selected}}>{{key}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Slides</label>
+        {{#each slides}}
+          {{> keynoteEditSlide}}
+        {{/each}}
+
+        {{#if Session 'keynoteEditReady'}}
+          <button class="btn btn-primary js-add-slide"><i class="glyphicon glyphicon-plus"></i> New Slide</button>
+        {{/if}}
 			</div>
 		</form>
 
-		<div>
-			<button class="btn js-remove"><i class="icon-remove"></i> Remove</button>
+    {{#if Session 'keynoteEditReady'}}
+    <hr>
+
+		<div class="form-group">
+      {{#if Session 'keynoteToRemove'}}
+        <button class="btn btn-default js-no-remove"><i class="icon-remove"></i> Cancel</button>
+        <button class="btn btn-danger js-remove"><i class="icon-remove"></i> Sure, remove</button>
+      {{else}}
+			  <button class="btn js-to-remove"><i class="icon-remove"></i> Remove Presentation</button>
+      {{/if}}
 		</div>
-	{{else}}
-		<div>
-			[Nothing found]
-		</div>
+    {{/if}}
+
+    <br><br>
 	{{/with}}
+</template>
+
+<template name="keynoteEditSlide">
+  <div class="floor slide">
+    <textarea name="slides__{{i}}" class="form-control" cols="30" rows="10">{{slide}}</textarea>
+
+    <button class="btn btn-default btn-remove-slide js-remove-slide"><i class="glyphicon glyphicon-trash"></i></button>
+  </div>
 </template>

@@ -1,0 +1,17 @@
+.color-line {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(248,248,248,.88);
+}
+
+.color-line-active {
+  background-color: rgba(92,184,92,.88);
+}
+
+.color-line-all {
+  background-color: rgba(91,192,222,.88);
+}

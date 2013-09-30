@@ -1,0 +1,16 @@
+.keynote-edit .slide {
+  visibility: visible;
+}
+
+.keynote-edit .btn-remove-slide {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  opacity: 0;
+  transition: all .3s;
+}
+
+.keynote-edit .slide:hover .btn-remove-slide {
+  opacity: 1;
+}
+

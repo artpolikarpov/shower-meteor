@@ -1,13 +1,18 @@
 Meteor.startup(function () {
-	Meteor.publish('keynotes-list', function () {
-		return this.userId && Keynotes.find({userId: this.userId});
+	Meteor.publish('keynotes-list', function (userId) {
+		return this.userId && Keynotes.find({userId: this.userId}, {fields: {title: 1, createdAt: 1, show: 1}});
 	});
 
 	Meteor.methods({
 		'addNewKeynote': function () {
-			return Keynotes.insert({
-				userId: Meteor.userId(),
-				id: Keynotes.find({}, {fields: {_id: 1}}).count() + 1 + ''});
+			var userId = Meteor.userId();
+      return Keynotes.insert({
+				userId: userId,
+				title: 'New Presentation',
+        slides: ['', '', ''],
+        createdAt: +new Date,
+        show: 'none'
+      });
 		}
 	});
 });

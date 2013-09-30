@@ -1,22 +1,18 @@
-Meteor.startup(function () {
+Meteor.autosubscribe(function () {
+  Session.set('keynoteListReady', false);
+  Meteor.subscribe('keynotes-list', Meteor.userId(), function () {
+    Session.set('keynoteListReady', true);
+  });
+});
 
-	Meteor.autosubscribe(function () {
-		Meteor.subscribe('keynotes-list');
-	});
+Template.keynotesList.keynotes = function () {
+  return Keynotes.find({}, {sort: {createdAt: -1}});
+};
 
-	Template.keynotesList.keynotes = function () {
-		return Keynotes.find({}, {sort: {id: -1}});
-	};
-
-	Template.keynotesList.events({
-		'click .js-new': function (e) {
-			Meteor.call('addNewKeynote', function (err, _id) {
-				Session.set('keynoteEdit', _id);
-			});
-		},
-		'click .js-edit': function () {
-			Session.set('keynoteEdit', this._id);
-		}
-	});
-
+Template.keynotesList.events({
+  'click .js-edit': function (e) {
+    e.preventDefault();
+    Session.set('keynoteEdit', this._id);
+    Session.set('keynoteFirstFocus', true);
+  }
 });

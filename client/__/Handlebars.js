@@ -1,4 +1,5 @@
-Handlebars.registerHelper("Session", function(key) {
+Handlebars.registerHelper("Session", function(key, compare) {
+  console.log('compare', compare);
   return Session.get(key);
 });
 

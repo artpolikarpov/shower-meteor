@@ -1,0 +1,16 @@
+.slide {
+  visibility: hidden;
+}
+
+.slide:after {
+  display: none;
+}
+
+.shower.full .slide.active,
+.shower.list .slide {
+  visibility: visible;
+}
+
+.shower.full .slide.active {
+  margin: 0;
+}

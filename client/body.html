@@ -4,27 +4,62 @@
 </head>
 
 <body>
-  {{> body}}
+{{> body}}
 </body>
 
 <template name="body">
-	{{#if Session 'keynoteShow'}}
-		{{> keynoteShow}}
-	{{else}}
-		<div class="container">
-			{{loginButtons}}
+  {{#if Session 'keynoteShowReady'}}
+  {{> keynoteShow}}
+  {{else}}
+  {{#if show}}
+  <div class="bootstrap">
+    
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container"><div class="row">
+        {{#if Session 'keynoteEdit'}}
+          <div class="col-xs-5">
+            <button class="btn btn-default navbar-btn js-back"><i class="glyphicon glyphicon-chevron-left"></i> Presentations</button>
+          </div>
+          <div class="col-xs-7 text-right">
+            {{#if Session '_keynoteUnsaved'}}
+              <button class="btn js-save btn-default navbar-btn">Save</button>
+            {{else}}
+              <button class="btn btn-default navbar-btn disabled">Saved</button>
+            {{/if}}
 
-			{{#if currentUser}}
-				{{#if Session 'keynoteEdit'}}
-					{{> keynoteEdit}}
-				{{else}}
-					{{> keynotesList}}
-				{{/if}}
-			{{else}}
-				<div>
-					[Welcome text]
-				</div>
-			{{/if}}
-	  </div>
-	{{/if}}
+            <a {{#unless Session 'keynoteURLState'}}href="/{{Session 'keynoteURL'}}" target="_blank"{{else}}disabled{{/unless}} class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-play"></i> View</a>
+          </div>
+        {{else}}
+          <div class="col-xs-7">
+            <ul class="nav navbar-nav">
+              {{loginButtons}}
+            </ul>
+          </div>
+          <div class="col-xs-5 text-right">
+            {{#if currentUser}}
+              <div class="navbar-right">
+                <button class="btn btn-primary navbar-btn js-new">New</button>
+              </div>
+            {{else}}
+              <span class="navbar-brand pull-right">shwr.tv</span>
+            {{/if}}
+          </div>
+
+        {{/if}}
+      </div></div>
+    </nav>
+
+    <div class="container">
+      {{#if currentUser}}
+      {{#if Session 'keynoteEdit'}}
+        {{> keynoteEdit}}
+      {{else}}
+        {{> keynotesList}}
+      {{/if}}
+      {{else}}
+      {{/if}}
+    </div>
+  </div>
+  {{/if}}
+  {{/if}}
 </template>

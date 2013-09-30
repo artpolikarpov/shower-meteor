@@ -1,7 +1,16 @@
 <template name="keynoteShow">
-  {{#with keynote}}
-		keynoteShow: {{_id}}
-	{{else}}
-		[Nothing found]
-	{{/with}}
+	{{#with keynote}}
+    {{#unless isGuest}}
+      <header class="caption">
+        <h1>{{title}}</h1>
+        <p>{{{tagline}}}</p>
+      </header>
+    {{/unless}}
+
+    {{#each slides}}
+      <section class="slide"><div>
+        {{{this}}}
+      </div></section>
+    {{/each}}
+  {{/with}}
 </template>

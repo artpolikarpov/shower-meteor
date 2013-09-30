@@ -1,0 +1,3 @@
+showerOptions = {
+  preventAutoInit: true
+}
