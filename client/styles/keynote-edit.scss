@@ -1,0 +1,23 @@
+.keynote-edit {
+  .one-slide {
+    .form-group {
+      margin-bottom: 7px;
+    }
+
+    .slide-buttons {
+      margin-right: 15px;
+    }
+  }
+
+  .new-slide {
+    display: none;
+  }
+
+  .one-slide.focus + .new-slide {
+      display: block;
+  }
+
+  .input-group-placeholder {
+    height: 34px;
+  }
+}

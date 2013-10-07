@@ -15,3 +15,30 @@ if (Meteor.isServer) {
     fetch: ['_id', 'userId', 'url']
   });
 }
+
+__.keynotes = {};
+
+__.keynotes.emptySlide = function () {
+  return {code: '', class: ''};
+}
+
+__.keynotes.emptyKeynote = function () {
+  var slides = [];
+
+  _.times(3, function () {
+    slides.push(__.keynotes.emptySlide());
+  });
+
+  return {
+    userId: Meteor.userId(),
+    title: 'New Presentation',
+    slides: slides,
+    createdAt: +new Date,
+    show: 'none',
+    theme: 'ribbon'
+  }
+};
+
+__.keynotes.idOrUrl = function (_id) {
+  return {$or: [{_id: _id}, {url: _id}]};
+}

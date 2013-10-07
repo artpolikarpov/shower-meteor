@@ -1,6 +1,10 @@
 Handlebars.registerHelper("Session", function(key, compare) {
-  console.log('compare', compare);
-  return Session.get(key);
+  if (typeof compare === 'object' && compare.hash && _.isEmpty(compare.hash)) {
+    return Session.get(key);
+  } else {
+    return Session.get(key) === compare;
+  }
+
 });
 
 Handlebars.registerHelper("equal", function(value1, value2) {

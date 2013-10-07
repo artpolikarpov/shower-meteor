@@ -7,7 +7,7 @@ Meteor.startup(function () {
 		'validateKeynoteURL': function (_id, newUrl) {
       newUrl = _.str.trim(newUrl);
 			console.log('validateKeynoteURL', newUrl);
-			return newUrl ? Keynotes.find({url: newUrl, _id: {$ne: _id}}, {fields: {_id: 1}}).count() ? 'error' : 'success' : '';
+			return newUrl ? !newUrl.match(/^[a-z0-9-]+$/i) || Keynotes.find({url: newUrl, _id: {$ne: _id}}, {fields: {_id: 1}}).count() ? 'error' : 'success' : '';
 		}
 	});
 });

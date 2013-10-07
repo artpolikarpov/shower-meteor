@@ -1,10 +1,11 @@
 <head>
-  <title>Shower TV</title>
+  <title>Sho.io</title>
   <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
 {{> body}}
+<div id="clipboard-container"></div>
 </body>
 
 <template name="body">
@@ -12,54 +13,70 @@
   {{> keynoteShow}}
   {{else}}
   {{#if show}}
-  <div class="bootstrap">
-    
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container"><div class="row">
-        {{#if Session 'keynoteEdit'}}
-          <div class="col-xs-5">
-            <button class="btn btn-default navbar-btn js-back"><i class="glyphicon glyphicon-chevron-left"></i> Presentations</button>
-          </div>
-          <div class="col-xs-7 text-right">
-            {{#if Session '_keynoteUnsaved'}}
-              <button class="btn js-save btn-default navbar-btn">Save</button>
-            {{else}}
-              <button class="btn btn-default navbar-btn disabled">Saved</button>
-            {{/if}}
+  <nav class="navbar {{#if Session 'keynoteEdit'}}navbar-default{{else}}navbar-inverse{{/if}} navbar-fixed-top" role="navigation">
+    <div class="container"><div class="row">
+      {{#if Session 'keynoteEdit'}}
+        <div class="col-xs-5">
+          <button class="btn btn-default navbar-btn js-back"><i class="glyphicon glyphicon-chevron-left"></i> Presentations</button>
+        </div>
+        <div class="col-xs-7 text-right">
+          {{#if Session '_keynoteUnsaved'}}
+            <button class="btn js-save btn-default navbar-btn" {{#if Session 'keynoteURLState'}}disabled{{/if}}>Save</button>
+          {{else}}
+            <button class="btn btn-default navbar-btn disabled">Saved</button>
+          {{/if}}
 
-            <a {{#unless Session 'keynoteURLState'}}href="/{{Session 'keynoteURL'}}" target="_blank"{{else}}disabled{{/unless}} class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-play"></i> View</a>
-          </div>
-        {{else}}
-          <div class="col-xs-7">
-            <ul class="nav navbar-nav">
-              {{loginButtons}}
-            </ul>
-          </div>
-          <div class="col-xs-5 text-right">
-            {{#if currentUser}}
-              <div class="navbar-right">
-                <button class="btn btn-primary navbar-btn js-new">New</button>
-              </div>
-            {{else}}
-              <span class="navbar-brand pull-right">shwr.tv</span>
-            {{/if}}
-          </div>
+          <a {{#unless Session 'keynoteURLState'}}href="/{{keynoteURL}}"  target="shwr-preview"{{else}}disabled{{/unless}} class="btn btn-default navbar-btn"><i class="glyphicon glyphicon-share-alt"></i> View</a>
+        </div>
+      {{else}}
+        <div class="col-xs-7">
+          <ul class="nav navbar-nav">
+            {{loginButtons}}
+          </ul>
+        </div>
+        <div class="col-xs-5 text-right">
+          {{#if currentUser}}
+            <div class="navbar-right">
+              <button class="btn btn-primary navbar-btn js-new"><i class="glyphicon glyphicon-plus"></i> New</button>
+            </div>
+          {{/if}}
+        </div>
 
-        {{/if}}
-      </div></div>
-    </nav>
+      {{/if}}
+    </div></div>
+  </nav>
 
-    <div class="container">
-      {{#if currentUser}}
+  <div class="container">
+    {{#if currentUser}}
       {{#if Session 'keynoteEdit'}}
         {{> keynoteEdit}}
       {{else}}
         {{> keynotesList}}
+        <br><br>
+        <hr>
+        <p class="text-center">Sho.io is an open-souce <abbr>HTML</abbr> presentation app.
+          Built with <a href="http://meteor.com/" target="_blank">Meteor</a>,
+          <a href="http://shwr.me/" target="_blank">Shower</a>,
+          <a href="http://emmet.io/" target="_blank">Emmet</a>,
+          and other cool stuff.</p>
       {{/if}}
-      {{else}}
-      {{/if}}
-    </div>
+    {{else}}
+      {{> bodyJumbotron}}
+    {{/if}}
   </div>
   {{/if}}
   {{/if}}
+</template>
+
+<template name="bodyJumbotron">
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Sho.io</h1>
+      <p>An open-souce <abbr>HTML</abbr> presentation app.
+        Built with <a href="http://meteor.com/" target="_blank">Meteor</a>,
+        <a href="http://shwr.me/" target="_blank">Shower</a>,
+        <a href="http://emmet.io/" target="_blank">Emmet</a>,
+        and other cool stuff.</p>
+    </div>
+  </div>
 </template>

@@ -1,5 +1,7 @@
 <template name="keynoteShow">
 	{{#with keynote}}
+    <div class="{{theme}} hide"></div> {{! Don’t remove, it’s for theme refreshing}}
+
     {{#unless isGuest}}
       <header class="caption">
         <h1>{{title}}</h1>
@@ -8,9 +10,11 @@
     {{/unless}}
 
     {{#each slides}}
-      <section class="slide"><div>
-        {{{this}}}
+      <section class="slide {{class}} {{active}}"><div>
+        {{#markdown}}{{{code}}}{{/markdown}}
       </div></section>
     {{/each}}
+
+    <div class="progress"><div></div></div>
   {{/with}}
 </template>

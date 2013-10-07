@@ -5,12 +5,19 @@ Template.body.show = function () {
 }
 
 Template.body.$backToList = function () {
-  Session.set('keynoteEdit', null);
-  Session.set('keynoteURL', null);
-  Session.set('keynoteURLState', null);
-  Session.set('keynoteToRemove', null);
-  Session.set('_keynoteUnsaved', null);
-  Session.set('keynoteShow', null);
+  Session.set('keynoteEdit', false);
+  Session.set('keynoteEditURL', false);
+  Session.set('keynoteURL', false);
+  Session.set('keynoteURLState', false);
+  Session.set('keynoteToRemove', false);
+  Session.set('keynoteToRemoveSlide', false);
+  Session.set('keynoteCurrentSlideNumber', false);
+  Session.set('_keynoteUnsaved', false);
+  Session.set('keynoteShow', false);
+}
+
+Template.body.keynoteURL = function () {
+  return Template.keynoteEdit.url.call(Template.keynoteEdit.keynote());
 }
 
 Template.body.events({
@@ -35,5 +42,15 @@ Template.body.events({
 });
 
 Template.body.rendered = function () {
+  var pathname = __.pathname();
+
+  if (!pathname) {
+    __.$html.addClass('bootstrap');
+  }
+
+  $('.js-over-clipboard').tooltip({
+    title: 'Press ' + __.ctrlLabel + ' + C to copy'
+  });
+
   Session.set('keynoteShow', __.pathname());
 }

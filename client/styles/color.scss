@@ -5,13 +5,24 @@
   top: 0;
   left: 0;
   z-index: 100;
+}
+
+.color-circle {
+  display: inline-block;
+  vertical-align: middle;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.color-none {
   background-color: rgba(248,248,248,.88);
 }
 
-.color-line-active {
+.color-active {
   background-color: rgba(92,184,92,.88);
 }
 
-.color-line-all {
+.color-all {
   background-color: rgba(91,192,222,.88);
 }

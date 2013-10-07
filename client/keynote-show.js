@@ -15,11 +15,13 @@ var keynote = function () {
 Template.keynoteShow.keynote = function () {
   var _keynote = keynote();
 
-  if (isGuest(_keynote)) {
-    _keynote.slides = _.filter(_keynote.slides, function (slide, i) {
-      return i === (_keynote.currentSlideNumber >= 0 ? _keynote.currentSlideNumber || 0 : 0);
+  if (!_keynote) return;
+
+  _keynote.slides = _.map(_keynote.slides, function (slide, i) {
+    return _.extend(slide, {
+      active: isGuest(_keynote) && i === (_keynote.currentSlideNumber >= 0 ? _keynote.currentSlideNumber || 0 : 0) ? 'active' : ''
     });
-  }
+  });
 
   return _keynote;
 };
@@ -33,48 +35,48 @@ Template.keynoteShow.ready = function () {
 };
 
 Template.keynoteShow.rendered = function () {
-  __.load('/shower/themes/bright/styles/screen.css', function () {
-    if (!$('.slide').length) return;
+  if (!$('.slide').length) return;
 
-    var _keynote = keynote();
+  var _keynote = keynote();
 
-    shower._addEventListeners(false);
-    shower.on = false;
-    shower.slideList = [];
+  __.$html.attr('class', 'shower ' + _keynote.theme);
 
-    if (isGuest(_keynote)) {
-      __.$body
-          .removeClass('bootstrap list')
-          .addClass('shower full');
+  document.title = _keynote.title || 'shwr.tv';
 
-      shower.guest = true;
+  shower._addEventListeners(false);
+  shower.on = false;
+  shower.slideList = [];
 
-      $('.slide').addClass('active');
+  if (isGuest(_keynote)) {
+    __.$body
+        .removeClass('list')
+        .addClass('full');
 
-      __.$window
-          .off('resize', shower._listeners['window resize'])
-          .on('resize', shower._listeners['window resize'])
-          .resize();
-    } else {
-      __.$body
-          .removeClass('bootstrap full')
-          .addClass('shower list');
+    shower.guest = true;
 
-      shower.guest = false;
+    __.$window
+        .off('resize', shower._listeners['window resize'])
+        .on('resize', shower._listeners['window resize'])
+        .resize();
+  } else {
+    __.$body
+        .removeClass('full')
+        .addClass('list');
 
-      shower.change = function () {
-        if (_keynote.userId !== Meteor.userId() || _keynote.show !== 'active') return;
+    shower.guest = false;
 
-        var currentSlideNumber = shower.getCurrentSlideNumber();
+    shower.change = function () {
+      if (_keynote.userId !== Meteor.userId() || _keynote.show !== 'active') return;
 
-        if (_keynote.currentSlideNumber !== currentSlideNumber) {
-          Keynotes.update(_keynote._id, {$set: {
-            currentSlideNumber: currentSlideNumber
-          }});
-        }
-      };
+      var currentSlideNumber = shower.getCurrentSlideNumber();
 
-      shower.init();
-    }
-  });
+      if (_keynote.currentSlideNumber !== currentSlideNumber) {
+        Keynotes.update(_keynote._id, {$set: {
+          currentSlideNumber: currentSlideNumber
+        }});
+      }
+    };
+
+    shower.init();
+  }
 };

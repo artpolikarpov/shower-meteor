@@ -1,0 +1,90 @@
+html.bootstrap {
+  body {
+    min-width: 320px;
+    padding-top: 80px;
+  }
+
+  .navbar-default {
+    background-color: transparent;
+  }
+
+  span.navbar-brand {
+    color: #999999 !important;
+    cursor: default;
+  }
+
+  .navbar-nav {
+    margin: 0;
+  }
+
+  .navbar-nav > li {
+    float: left;
+  }
+
+  .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  #login-dropdown-list .dropdown-menu,
+  #login-dropdown-list .dropdown-toggle {
+    width: 260px;
+  }
+
+  .navbar > .container .navbar-brand {
+    margin-left: -15px;
+  }
+
+  .navbar-nav .dropdown.open {
+    background-color: #e7e7e7;
+  }
+
+  .navbar-nav .open .dropdown-menu {
+    background-color: #fff;
+    position: absolute;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    -o-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  }
+
+  .error {
+    color: #b94a48;
+  }
+
+  .floor {
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .btn .row {
+    text-align: left;
+    display: block;
+    margin: 0;
+    padding: 5px 0;
+  }
+
+  .text-nowrap {
+    white-space: nowrap;
+  }
+
+  .text-muted, [disabled] .glyphicon {
+    color: inherit;
+    opacity: .5;
+  }
+
+  a {
+    u, &.no-u, &.no-u:hover {
+      text-decoration: none;
+    }
+
+    &:hover {
+      u {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+}

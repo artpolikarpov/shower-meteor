@@ -1,12 +1,13 @@
 <template name="keynoteEdit">
 	{{#with keynote}}
-    <div class="color-line color-line-{{show}}"></div>
+    <div class="color-line color-{{show}}"></div>
 
 		<form role="form" class="keynote-edit">
 			<div class="form-group">
         <label for="title" class="control-label">Presentation Title</label>
         <input id="title" type="text" class="form-control input-lg" name="title" value="{{title}}" />
 			</div>
+
       <div class="form-group">
         <label for="tagline" class="control-label">Tagline</label>
         <input id="tagline" type="text" class="form-control" name="tagline" value="{{tagline}}" />
@@ -14,47 +15,62 @@
 
       <div class="form-group {{Session 'keynoteURLState'}}">
         <label for="url" class="control-label">Permalink</label>
-        <div class="input-group">
-          <label for="url" class="input-group-addon">http://shwr.tv/</label>
-          <input id="url" type="text" class="form-control" name="url" value="{{url}}" />
-        </div>
+        {{#if Session 'keynoteEditURL'}}
+          <div class="input-group">
+            <label for="url" class="input-group-addon">http://sho.io/</label>
+            <input id="url" type="text" class="form-control" name="url" value="{{url}}" />
+            <span class="input-group-btn">
+              <button class="btn btn-default js-edit-url" {{#if Session 'keynoteURLState'}}disabled{{/if}}>Done</button>
+            </span>
+          </div>
+        {{else}}
+          <p><a href="/{{url}}" class="no-u js-over-clipboard" target="shwr-preview"><i class="glyphicon glyphicon-share-alt"></i> <u>http://sho.io/{{url}}</u></a> &nbsp; <button class="btn btn-default js-edit-url">Edit</button></p>
+        {{/if}}
 			</div>
 
       <div class="form-group">
-        <label for="show" class="control-label">Visibility</label>
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
-            <select id="show" name="show" class="form-control">
-              {{#each showOptions}}
-                <option value="{{value}}" {{selected}}>{{key}}</option>
-              {{/each}}
-            </select>
+        <label class="control-label">Visibility</label>
+        <div>
+          <div class="btn-group" data-toggle="buttons">
+            {{#each showOptions}}
+              <label class="btn btn-default {{active}}">
+                <input type="radio" value="{{value}}" name="show" {{checked}}> <i class="color-circle color-{{value}}"></i> {{key}}
+              </label>
+            {{/each}}
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label class="control-label">Slides</label>
-        {{#each slides}}
-          {{> keynoteEditSlide}}
-        {{/each}}
+        <label class="control-label">Theme</label>
+        <div>
+          <div class="btn-group" data-toggle="buttons">
+            {{#each themeOptions}}
+              <label class="btn btn-default {{active}}">
+                <input type="radio" value="{{value}}" name="theme" {{checked}}> {{key}}
+              </label>
+            {{/each}}
+          </div>
+        </div>
+      </div>
 
-        {{#if Session 'keynoteEditReady'}}
-          <button class="btn btn-primary js-add-slide"><i class="glyphicon glyphicon-plus"></i> New Slide</button>
-        {{/if}}
-			</div>
+      {{#each slides}}
+        {{> keynoteEditSlide}}
+      {{/each}}
 		</form>
 
     {{#if Session 'keynoteEditReady'}}
     <hr>
 
-		<div class="form-group">
-      {{#if Session 'keynoteToRemove'}}
-        <button class="btn btn-default js-no-remove"><i class="icon-remove"></i> Cancel</button>
-        <button class="btn btn-danger js-remove"><i class="icon-remove"></i> Sure, remove</button>
-      {{else}}
-			  <button class="btn js-to-remove"><i class="icon-remove"></i> Remove Presentation</button>
-      {{/if}}
+		<div class="form-group clearfix">
+      <div class="btn-group pull-right">
+        {{#if Session 'keynoteToRemove'}}
+          <button class="btn btn-danger js-remove"><i class="glyphicon glyphicon-trash"></i> Sure, remove</button>
+          <button class="btn btn-default js-no-remove"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
+        {{else}}
+          <button class="btn js-to-remove"><i class="glyphicon glyphicon-trash"></i> Remove Presentation</button>
+        {{/if}}
+      </div>
 		</div>
     {{/if}}
 
@@ -63,9 +79,35 @@
 </template>
 
 <template name="keynoteEditSlide">
-  <div class="floor slide">
-    <textarea name="slides__{{i}}" class="form-control" cols="30" rows="10">{{slide}}</textarea>
+  <div class="one-slide form-group {{focus}}">
+    <div class="form-group">
+      <label class="control-label" for="slides__{{i}}__code">Slide {{no}}</label>
+      <textarea id="slides__{{i}}__code" name="slides__{{i}}__code" class="form-control" cols="30" rows="10" placeholder="Markdown or HTML">{{code}}</textarea>
+    </div>
 
-    <button class="btn btn-default btn-remove-slide js-remove-slide"><i class="glyphicon glyphicon-trash"></i></button>
+    <div class="form-group row">
+      <div class="form-group col-xs-6">
+        <label class="sr-only" for="slides__{{i}}__class">Additional classes for the slide</label>
+        <input class="form-control" id="slides__{{i}}__class" name="slides__{{i}}__class" value="{{class}}" placeholder="Additional classes for the slide" />
+      </div>
+      <div class="form-group slide-buttons pull-right">
+        <div class="btn-group">
+          <button class="btn btn-default js-move-slide" data-direction="1" {{#if last}}disabled{{/if}}><i class="glyphicon glyphicon-arrow-down"></i></button>
+          <button class="btn btn-default js-move-slide" data-direction="-1" {{#if first}}disabled{{/if}}><i class="glyphicon glyphicon-arrow-up"></i></button>
+        </div>
+        <div class="btn-group">
+          {{#if Session 'keynoteToRemoveSlide' i}}
+            <button class="btn btn-danger js-remove-slide" title="Sure, remove"><i class="glyphicon glyphicon-trash"></i></button>
+            <button class="btn btn-default js-no-remove-slide" title="Cancel"><i class="glyphicon glyphicon-remove"></i></button>
+          {{else}}
+            <button class="btn js-to-remove-slide" title="Remove Slide"><i class="glyphicon glyphicon-trash"></i></button>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group new-slide">
+    <button class="btn btn-primary js-add-slide"><i class="glyphicon glyphicon-plus"></i> New Slide</button>
   </div>
 </template>

@@ -10,7 +10,7 @@ window.shower = window.shower || (function (window, document, undefined) {
         document: document
       },
       url = window.location,
-      options = window.showerOptions || {},
+      options = typeof showerOptions !== 'undefined' ? showerOptions : {},
       slides = [],
       progress = [],
       timer,
@@ -260,7 +260,7 @@ window.shower = window.shower || (function (window, document, undefined) {
       }
 
       shower._listeners['window resize']();
-      shower.change && shower.change();
+      //shower.change && shower.change();
     }
 
     return shower;
@@ -412,7 +412,7 @@ window.shower = window.shower || (function (window, document, undefined) {
    * @param {Function} [callback] runs only if you not in List mode.
    * @returns {Number|Boolean}
    */
-  shower.go = function (slideNumber, callback) {
+  shower.go = function (slideNumber, callback, passive) {
     var slide;
 
     if (!shower._isNumber(slideNumber)) {
@@ -441,7 +441,7 @@ window.shower = window.shower || (function (window, document, undefined) {
       callback();
     }
 
-    shower.change && shower.change();
+    shower.change && !passive && shower.change();
 
     return slideNumber;
   };
@@ -835,7 +835,7 @@ window.shower = window.shower || (function (window, document, undefined) {
     'window DOMContentLoaded': function () {
       shower.DOMContentLoaded = true;
       if (shower.on && shower.isSlideMode()) {
-        shower.go(shower.getCurrentSlideNumber());
+        shower.go(shower.getCurrentSlideNumber(), null, 'passive');
         shower.enterSlideMode();
       } else {
         shower._applyTransform('none');
