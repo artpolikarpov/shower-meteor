@@ -34,12 +34,6 @@
 }
 
 html.shower.ribbon {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
 
   html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
@@ -78,7 +72,7 @@ html.shower.ribbon {
 
   body {
     counter-reset: slide;
-    font: 24px/2 'Open Sans', sans-serif
+    font: 25px/2 'PT Sans', sans-serif
   }
 
   a {
@@ -87,21 +81,23 @@ html.shower.ribbon {
 
   .caption {
     display: none;
-    margin: 0 0 60px;
-    padding: 0 50px 0 0;
-    color: #555
+    margin: 0 0 50px;
+    color: #3C3D40;
+    text-shadow: 0 1px 1px #8D8E90
   }
 
   .caption h1 {
-    font: 50px 'Open Sans Light', sans-serif
+    font: bold 50px/1 'PT Sans Narrow', sans-serif
   }
 
   .caption a {
-    color: #52a2df
+    color: #4b86c2;
+    text-shadow: 0 -1px 1px #1F3F60;
+    text-decoration: none
   }
 
   .caption a:hover {
-    border-bottom: 0.1em solid
+    color: #5e93c8
   }
 
   .badge {
@@ -123,8 +119,10 @@ html.shower.ribbon {
     right: -50%;
     left: -50%;
     visibility: visible;
-    background: #52a2df;
+    background: #4b86c2;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
     color: #FFF;
+    text-decoration: none;
     text-align: center;
     -webkit-transform-origin: 50% 100%;
     -moz-transform-origin: 50% 100%;
@@ -136,6 +134,10 @@ html.shower.ribbon {
     -ms-transform: rotate(45deg) translateY(-1em);
     -o-transform: rotate(45deg) translateY(-1em);
     transform: rotate(45deg) translateY(-1em)
+  }
+
+  .badge a:hover {
+    background: #568ec6
   }
 
   .slide {
@@ -152,14 +154,17 @@ html.shower.ribbon {
 
   .slide:after {
     position: absolute;
-    right: 0;
-    bottom: 45px;
-    left: 0;
-    color: #AAA;
+    top: 0;
+    right: 119px;
+    padding: 20px 0 0;
+    width: 50px;
+    height: 80px;
+    background: url(/packages/shower/themes/ribbon/images/ribbon.svg) no-repeat;
+    color: #FFF;
     counter-increment: slide;
     content: counter(slide);
     text-align: center;
-    line-height: 1
+    font-size: 20px
   }
 
   .slide>div {
@@ -167,27 +172,32 @@ html.shower.ribbon {
     top: 0;
     left: 0;
     overflow: hidden;
-    padding: 100px 96px 0 128px;
-    width: 800px;
-    height: 540px
+    padding: 105px 120px 0;
+    width: 784px;
+    height: 535px
   }
 
   .debug .slide {
-    background-image: url(../images/grid-16x10.svg)
+    background: #fff url(/packages/shower/themes/ribbon/images/grid-16x10.svg) no-repeat
   }
 
   .slide h2 {
-    margin: 0 0 58px;
-    font: 48px/1 'Open Sans Light', sans-serif
+    margin: 0 0 37px;
+    color: #666;
+    font: bold 50px/1 'PT Sans Narrow', sans-serif
   }
 
   .slide p {
-    margin: 0 0 48px
+    margin: 0 0 50px
+  }
+
+  .slide p.note {
+    color: #999
   }
 
   .slide a {
     border-bottom: 0.1em solid;
-    color: #52a2df
+    color: #4b86c2
   }
 
   .slide b, .slide strong {
@@ -199,13 +209,15 @@ html.shower.ribbon {
   }
 
   .slide kbd, .slide code, .slide samp {
-    padding: 2px 7px;
-    background: rgba(0, 0, 0, 0.1);
+    padding: 3px 8px;
+    border-radius: 8px;
+    background: #fafaa2;
+    color: #000;
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4;
     line-height: 1;
-    font-family: 'Anka Coder', monospace
+    font-family: 'PT Mono', monospace
   }
 
   .slide blockquote {
@@ -214,21 +226,20 @@ html.shower.ribbon {
 
   .slide blockquote:before {
     position: absolute;
-    margin: -50px 0 0 -100px;
-    color: #DDD;
-    content: '\201C';
-    line-height: 1;
-    font-size: 200px
+    margin: -16px 0 0 -80px;
+    color: #CCC;
+    font: 200px/1 'PT Sans', sans-serif;
+    content: '\201C'
   }
 
   .slide blockquote+figcaption {
-    margin: -48px 0 48px;
+    margin: -50px 0 50px;
     font-style: italic;
     font-weight: bold
   }
 
   .slide ol, .slide ul {
-    margin: 0 0 48px;
+    margin: 0 0 50px;
     counter-reset: list
   }
 
@@ -239,7 +250,7 @@ html.shower.ribbon {
   .slide ol li:before, .slide ul li:before {
     display: inline-block;
     width: 2em;
-    color: #AAA;
+    color: #BBB;
     text-align: right
   }
 
@@ -248,21 +259,21 @@ html.shower.ribbon {
   }
 
   .slide ul>li:before {
-    content: '\2022\00A0\00A0\2009'
+    content: '\2022\00A0\00A0'
   }
 
   .slide ul>li:lang(ru):before {
-    content: '\2014\00A0\2009'
+    content: '\2014\00A0\00A0'
   }
 
   .slide ol>li:before {
     counter-increment: list;
-    content: counter(list) ".\00A0\2009"
+    content: counter(list) ".\00A0"
   }
 
   .slide pre {
-    margin: 0 0 45px;
-    padding: 3px 0 0;
+    margin: 0 0 49px;
+    padding: 1px 0 0;
     counter-reset: code;
     white-space: normal
   }
@@ -272,13 +283,15 @@ html.shower.ribbon {
     padding: 0;
     background: none;
     white-space: pre;
-    line-height: 2
+    line-height: 50px
   }
 
   .slide pre code:before {
     position: absolute;
-    margin-left: -50px;
-    color: #AAA;
+    margin: 0 0 0 -110px;
+    width: 100px;
+    color: #BBB;
+    text-align: right;
     counter-increment: code;
     content: counter(code, decimal-leading-zero) "."
   }
@@ -288,19 +301,23 @@ html.shower.ribbon {
   }
 
   .slide pre mark {
-    background: none;
-    color: #52a2df;
+    padding: 3px 8px;
+    border-radius: 8px;
+    background: #F7FCA0;
+    color: #000;
     font-style: normal
   }
 
   .slide pre mark.important {
-    padding: 3px 7px 0;
-    background: #52a2df;
-    color: #FFF
+    background: #C00;
+    color: #FFF;
+    font-weight: normal
   }
 
   .slide pre mark.comment {
-    color: #AAA
+    padding: 0;
+    background: none;
+    color: #999
   }
 
   .slide table {
@@ -311,7 +328,7 @@ html.shower.ribbon {
   }
 
   .slide table th, .slide table td {
-    background: url("data:image/gif;base64,R0lGODdhAQABAPAAAFKi3wAAACH/C1hNUCBEYXRhWE1QAz94cAAsAAAAAAEAAQBAAgJEAQA7") 0 100% repeat-x
+    background: url("data:image/gif;base64,R0lGODdhAQABAPAAAJmZmQAAACH/C1hNUCBEYXRhWE1QAj94ACwAAAAAAQABAAACAkQBADs=") 0 100% repeat-x
   }
 
   .slide table th {
@@ -320,7 +337,7 @@ html.shower.ribbon {
   }
 
   .slide table.striped tr:nth-child(even) {
-    background: #f1f7fc
+    background: #EEE
   }
 
   .slide.cover, .slide.shout {
@@ -328,7 +345,7 @@ html.shower.ribbon {
   }
 
   .slide.cover:after, .slide.shout:after {
-    content: ''
+    visibility: hidden
   }
 
   .slide.cover {
@@ -373,16 +390,17 @@ html.shower.ribbon {
   }
 
   .slide.shout {
-    background: #52a2df
+    background-image: none
   }
 
   .slide.shout h2 {
     position: absolute;
     top: 50%;
-    left: 128px;
-    right: 96px;
-    color: #FFF;
-    font-size: 100px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+    font-size: 150px;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -450,9 +468,9 @@ html.shower.ribbon {
     bottom: -640px;
     z-index: 1;
     display: none;
-    padding: 20px 96px 20px 128px;
-    background: #fafac4;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+    padding: 20px 120px;
+    background: #fafaa2;
+    box-shadow: 0 0 0 2px #f0f0ac inset;
     -webkit-transition: bottom 0.3s;
     -moz-transition: bottom 0.3s;
     -o-transition: bottom 0.3s;
@@ -467,9 +485,8 @@ html.shower.ribbon {
     .list {
       position: absolute;
       clip: rect(0, auto, auto, 0);
-      padding: 50px 0 50px 50px;
-      background: #e2e2e2 url(../images/mesh.png) 50% 0;
-      text-align: center
+      padding: 80px 0 40px 100px;
+      background: #585a5e url(/packages/shower/themes/ribbon/images/linen.png)
     }
 
     .list .caption, .list .badge {
@@ -477,11 +494,8 @@ html.shower.ribbon {
     }
 
     .list .slide {
-      position: relative;
-      top: 270px;
-      display: inline-block;
-      margin: -270px -462px 0 0;
-      text-align: left;
+      float: left;
+      margin: 0 -412px -220px 0;
       -webkit-transform-origin: 0 0;
       -moz-transform-origin: 0 0;
       -ms-transform-origin: 0 0;
@@ -501,7 +515,8 @@ html.shower.ribbon {
       z-index: -1;
       width: 512px;
       height: 320px;
-      box-shadow: 0 0 0 1px #DDD;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.005), 0 20px 50px rgba(42, 43, 45, 0.6);
+      border-radius: 2px;
       content: '';
       -webkit-transform-origin: 0 0;
       -moz-transform-origin: 0 0;
@@ -516,21 +531,40 @@ html.shower.ribbon {
     }
 
     .list .slide:after {
-      top: 100%;
-      bottom: auto;
-      padding-top: 50px
+      top: auto;
+      right: auto;
+      bottom: -80px;
+      left: 120px;
+      padding: 0;
+      width: auto;
+      height: auto;
+      background: none;
+      color: #3C3D40;
+      text-shadow: 0 1px 1px #8D8E90;
+      font-weight: bold;
+      -webkit-transform-origin: 0 0;
+      -moz-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
+      -o-transform-origin: 0 0;
+      transform-origin: 0 0;
+      -webkit-transform: scale(2);
+      -moz-transform: scale(2);
+      -ms-transform: scale(2);
+      -o-transform: scale(2);
+      transform: scale(2)
     }
 
     .list .slide:hover:before {
-      box-shadow: 0 0 0 1px #eee, 0 0 0 12px rgba(255, 255, 255, 0.5)
+      box-shadow: 0 0 0 10px rgba(42, 43, 45, 0.3), 0 20px 50px rgba(42, 43, 45, 0.6)
     }
 
     .list .slide:target:before {
-      box-shadow: 0 0 10px 0 #3c96db, 0 0 0 12px #52a2df
+      box-shadow: 0 0 0 1px #376da3, 0 0 0 10px #4b86c2, 0 20px 50px rgba(42, 43, 45, 0.6)
     }
 
     .list .slide:target:after {
-      color: #52a2df
+      text-shadow: 0 1px 1px rgba(42, 43, 45, 0.6);
+      color: #4b86c2
     }
 
     .list .slide>div:before {
@@ -544,7 +578,7 @@ html.shower.ribbon {
     }
 
     .list .slide.cover:after, .list .slide.shout:after {
-      content: counter(slide)
+      visibility: visible
     }
 
     .list .slide footer {
@@ -581,7 +615,7 @@ html.shower.ribbon {
       margin: 0
     }
 
-    .full .slide.shout.right h2, .full .slide.shout.up h2 {
+    .full .slide.shout.grow h2, .full .slide.shout.shrink h2 {
       opacity: 0;
       -webkit-transition: all 0.4s ease-out;
       -moz-transition: all 0.4s ease-out;
@@ -589,46 +623,45 @@ html.shower.ribbon {
       transition: all 0.4s ease-out
     }
 
-    .full .slide.shout.right:target h2, .full .slide.shout.up:target h2 {
+    .full .slide.shout.grow:target h2, .full .slide.shout.shrink:target h2 {
       opacity: 1;
-      -webkit-transform: translateX(0) translateY(-50%);
-      -moz-transform: translateX(0) translateY(-50%);
-      -ms-transform: translateX(0) translateY(-50%);
-      -o-transform: translateX(0) translateY(-50%);
-      transform: translateX(0) translateY(-50%)
+      -webkit-transform: scale(1) translateY(-50%);
+      -moz-transform: scale(1) translateY(-50%);
+      -ms-transform: scale(1) translateY(-50%);
+      -o-transform: scale(1) translateY(-50%);
+      transform: scale(1) translateY(-50%)
     }
 
-    .full .slide.shout.right h2 {
-      -webkit-transform: translateX(-100%) translateY(-50%);
-      -moz-transform: translateX(-100%) translateY(-50%);
-      -ms-transform: translateX(-100%) translateY(-50%);
-      -o-transform: translateX(-100%) translateY(-50%);
-      transform: translateX(-100%) translateY(-50%)
+    .full .slide.shout.grow h2 {
+      -webkit-transform: scale(0.1) translateY(-50%);
+      -moz-transform: scale(0.1) translateY(-50%);
+      -ms-transform: scale(0.1) translateY(-50%);
+      -o-transform: scale(0.1) translateY(-50%);
+      transform: scale(0.1) translateY(-50%)
     }
 
-    .full .slide.shout.up h2 {
-      -webkit-transform: translateX(0) translateY(100%);
-      -moz-transform: translateX(0) translateY(100%);
-      -ms-transform: translateX(0) translateY(100%);
-      -o-transform: translateX(0) translateY(100%);
-      transform: translateX(0) translateY(100%)
+    .full .slide.shout.shrink h2 {
+      -webkit-transform: scale(10) translateY(-50%);
+      -moz-transform: scale(10) translateY(-50%);
+      -ms-transform: scale(10) translateY(-50%);
+      -o-transform: scale(10) translateY(-50%);
+      transform: scale(10) translateY(-50%)
     }
 
     .full .progress {
       position: absolute;
       right: 0;
       bottom: 0;
-      left: 0;
+      left: -10px;
       z-index: 1
     }
 
     .full .progress div {
-      position: absolute;
-      left: 0;
-      bottom: 0;
+      padding-left: 10px;
       width: 0;
-      height: 8px;
-      background: #52a2df;
+      height: 10px;
+      background: url(/packages/shower/themes/ribbon/images/progress.svg) 100% 0 no-repeat;
+      background-clip: content-box;
       -webkit-transition: width 0.2s linear;
       -moz-transition: width 0.2s linear;
       -o-transition: width 0.2s linear;
@@ -638,15 +671,14 @@ html.shower.ribbon {
 
   @media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi) {
     .list {
-      background-image: url(../images/mesh@2x.png);
+      background-image: url(/packages/shower/themes/ribbon/images/linen@2x.png);
       background-size: 256px
     }
   }
 
-  @media screen and (max-width: 1180px) {
+  @media screen and (max-width: 1324px) {
     .list .slide {
-      top: 430px;
-      margin: -430px -718px 0 0;
+      margin: 0 -688px -400px 0;
       -webkit-transform: scale(0.25);
       -moz-transform: scale(0.25);
       -ms-transform: scale(0.25);
@@ -655,7 +687,7 @@ html.shower.ribbon {
     }
   }
 
-  @media screen and (max-width: 1180px) {
+  @media screen and (max-width: 1324px) {
     .list .slide:before {
       width: 256px;
       height: 160px;
@@ -667,19 +699,20 @@ html.shower.ribbon {
     }
   }
 
-  @media screen and (max-width: 1180px) {
+  @media screen and (max-width: 1324px) {
     .list .slide:after {
-      width: 512px;
-      -webkit-transform-origin: 0 0;
-      -moz-transform-origin: 0 0;
-      -ms-transform-origin: 0 0;
-      -o-transform-origin: 0 0;
-      transform-origin: 0 0;
-      -webkit-transform: scale(2);
-      -moz-transform: scale(2);
-      -ms-transform: scale(2);
-      -o-transform: scale(2);
-      transform: scale(2)
+      bottom: -104px;
+      -webkit-transform: scale(4);
+      -moz-transform: scale(4);
+      -ms-transform: scale(4);
+      -o-transform: scale(4);
+      transform: scale(4)
+    }
+  }
+
+  @media screen and (max-width: 1324px) {
+    .list .slide:target:before {
+      box-shadow: 0 0 0 1px #376da3, 0 0 0 10px #4b86c2, 0 20px 50px rgba(42, 43, 45, 0.6)
     }
   }
 
