@@ -1,5 +1,5 @@
 __.serializeForm = function (form) {
-  console.log('__.serializeForm', form);
+  //console.log('__.serializeForm', form);
 
 	var array = $(form).serializeArray(),
       object = _.object(
@@ -10,7 +10,7 @@ __.serializeForm = function (form) {
         _.pluck(array, 'value')
       );
 
-  console.log('__.serializeForm', object);
+  //console.log('__.serializeForm', object);
 
 	return object;
 };

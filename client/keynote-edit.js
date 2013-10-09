@@ -1,7 +1,7 @@
 Meteor.autosubscribe(function () {
   Session.set('keynoteEditReady', false);
   Meteor.subscribe('keynote-edit', Session.get('keynoteEdit'), function () {
-    console.log('Subscribed to `keynote-edit`');
+    //console.log('Subscribed to `keynote-edit`');
     Session.set('keynoteEditReady', true);
   });
 });
@@ -122,7 +122,7 @@ Template.keynoteEdit.events({
     Session.set('keynoteSlideFocus', newIndex);
   },
   'click .js-to-remove-slide': function (e) {
-    console.log('click .js-to-remove-slide', this.i);
+    //console.log('click .js-to-remove-slide', this.i);
 
     e.preventDefault();
     e.stopPropagation();
@@ -175,15 +175,15 @@ Template.keynoteEditSlide.events({
         direction = +$button.data('direction'),
         newIndex = this.i + direction;
 
-    console.log('newIndex', newIndex);
+    //console.log('newIndex', newIndex);
 
     slides = _.reject(slides, function (slide, i) {
-      console.log('slide', slide);
-      console.log('this', this);
+      //console.log('slide', slide);
+      //console.log('this', this);
       return i === this.i;
     }, this);
 
-    console.log('slides', slides);
+    //console.log('slides', slides);
 
     if (!slides.length || !direction) return;
 
@@ -197,7 +197,7 @@ Template.keynoteEditSlide.events({
 });
 
 Template.keynoteEdit.rendered = function () {
-  console.log('Template.keynoteEdit.rendered');
+  //console.log('Template.keynoteEdit.rendered');
 
   emmet.require('textarea').setup({
       pretty_break: true,
