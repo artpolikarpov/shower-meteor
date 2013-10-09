@@ -1,7 +1,6 @@
 {
   "packages": {
     "bootstrap-3": {},
-    "marked": {},
-    "scss": {}
+    "marked": {}
   }
 }
