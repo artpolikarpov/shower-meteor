@@ -1,6 +1,4 @@
 Template.body.show = function () {
-  console.log('show', !__.pathname());
-
   return !__.pathname();
 }
 

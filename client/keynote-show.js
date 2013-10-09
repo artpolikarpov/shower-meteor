@@ -3,27 +3,39 @@ Meteor.autosubscribe(function () {
   Meteor.subscribe('keynote-show', Session.get('keynoteShow'), function () {
     Session.set('keynoteShowReady', true);
   });
+  Meteor.subscribe('keynote-show-current-slide', Session.get('keynoteShow'));
 });
 
 var keynote = function () {
       return Keynotes.findOne({$or: [{_id: Session.get('keynoteShow')}, {url: Session.get('keynoteShow')}]});
     },
     isGuest = function (keynote) {
-      return keynote && (keynote.userId !== Meteor.userId() && keynote.show === 'active');
+      return keynote && keynote.userId !== Meteor.userId() && keynote.show === 'active';
     };
 
+Template.keynoteShow.cacheStamp = function () {
+  return $('link[rel="stylesheet"]').attr('href').replace(/(.*)\/(.*)$/, '$2').replace(/[/.?]+/g, '');
+}
+
 Template.keynoteShow.keynote = function () {
-  var _keynote = keynote();
+  var _keynote = keynote(),
+      currentSlide;
 
   if (!_keynote) return;
 
   _keynote.slides = _.map(_keynote.slides, function (slide, i) {
     return _.extend(slide, {
-      active: isGuest(_keynote) && i === (_keynote.currentSlideNumber >= 0 ? _keynote.currentSlideNumber || 0 : 0) ? 'active' : ''
+      active: isGuest(_keynote) && (currentSlide = CurrentSlides.findOne()) && i === (currentSlide.currentSlide >= 0 ? currentSlide.currentSlide || 0 : 0) ? 'active' : ''
     });
   });
 
   return _keynote;
+};
+
+Template.keynoteShow.themes = function () {
+  return _.map(__.keynotes.themes, function (value) {
+    return {theme: value};
+  });
 };
 
 Template.keynoteShow.isGuest = function () {
@@ -39,7 +51,19 @@ Template.keynoteShow.rendered = function () {
 
   var _keynote = keynote();
 
-  __.$html.attr('class', 'shower ' + _keynote.theme);
+  __.waitFor(function () {
+      var $slide = $('.slide');
+      return 1024 === $slide.width() && 640 === $slide.height(); // TODO: no hard-coding, please
+  }, function () {
+    $('head > link[rel="stylesheet"]').attr('disabled', true);
+    shower._listeners['window resize']();
+    Session.set('keynoteThemeLoaded', true);
+  });
+
+  $('#' + _keynote.theme + '-theme')
+      .attr('disabled', false)
+      .siblings('link.js-stylesheet')
+      .attr('disabled', true);
 
   document.title = _keynote.title || 'shwr.tv';
 
@@ -56,8 +80,7 @@ Template.keynoteShow.rendered = function () {
 
     __.$window
         .off('resize', shower._listeners['window resize'])
-        .on('resize', shower._listeners['window resize'])
-        .resize();
+        .on('resize', shower._listeners['window resize']);
   } else {
     __.$body
         .removeClass('full')
@@ -67,14 +90,7 @@ Template.keynoteShow.rendered = function () {
 
     shower.change = function () {
       if (_keynote.userId !== Meteor.userId() || _keynote.show !== 'active') return;
-
-      var currentSlideNumber = shower.getCurrentSlideNumber();
-
-      if (_keynote.currentSlideNumber !== currentSlideNumber) {
-        Keynotes.update(_keynote._id, {$set: {
-          currentSlideNumber: currentSlideNumber
-        }});
-      }
+      Meteor.call('updateCurrentSlide', _keynote._id, shower.getCurrentSlideNumber());
     };
 
     shower.init();

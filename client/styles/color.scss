@@ -5,6 +5,7 @@
   top: 0;
   left: 0;
   z-index: 100;
+  border-bottom: 1px solid;
 }
 
 .color-circle {
@@ -16,13 +17,16 @@
 }
 
 .color-none {
-  background-color: rgba(248,248,248,.88);
+  background-color: rgba(#d0d0d0, .88);
+  border-color: #c0c0c0;
 }
 
 .color-active {
-  background-color: rgba(92,184,92,.88);
+  background-color: rgba(#d9534f, .88);
+  border-color: #d43f3a;
 }
 
 .color-all {
-  background-color: rgba(91,192,222,.88);
+  background-color: rgba(#fff, .88);
+  border-color: #eee;
 }

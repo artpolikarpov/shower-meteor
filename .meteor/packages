@@ -10,7 +10,9 @@ accounts-password
 accounts-ui-bootstrap-3
 standard-app-packages
 bootstrap-3
-showdown
+# showdown
 scss
 shower
 emmet
+marked
+spin

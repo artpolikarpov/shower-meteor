@@ -20,4 +20,10 @@
   .input-group-placeholder {
     height: 34px;
   }
+
+  .color-circle {
+    &.color-all {
+      display: none;
+    }
+  }
 }

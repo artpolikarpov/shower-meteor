@@ -1,4 +1,9 @@
 <template name="keynoteShow">
+  {{#each themes}}
+    <link rel="stylesheet" href="/shower/themes/{{theme}}/styles/screen.css?{{cacheStamp}}" id="{{theme}}-theme" class="js-stylesheet" disabled="disabled" />
+  {{/each}}
+  <link rel="stylesheet" href="/shower/themes/themes-override.css?{{cacheStamp}}" />
+
 	{{#with keynote}}
     <div class="{{theme}} hide"></div> {{! Don’t remove, it’s for theme refreshing}}
 
@@ -16,5 +21,12 @@
     {{/each}}
 
     <div class="progress"><div></div></div>
+  {{else}}
+    {{#if Session 'keynoteShowReady'}}
+      <p class="lead text-center"><strong>404.</strong> Nothing here</p>
+      <p class="text-center"><a href="/">Sho.io</a></p>
+    {{else}}
+      {{> spinner}}
+    {{/if}}
   {{/with}}
 </template>

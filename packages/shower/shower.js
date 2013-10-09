@@ -780,7 +780,7 @@ window.shower = window.shower || (function (window, document, undefined) {
    */
   shower.clearPresenterNotes = function () {
     if (window.console && window.console.clear) {
-      ////console.clear();
+      console.clear();
     }
   };
 

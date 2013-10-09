@@ -19,11 +19,11 @@ Template.keynoteEdit.slides = function () {
 }
 
 Template.keynoteEdit.showOptions = function () {
-  return __.selectOptions({'Hidden': 'none', 'Active slide only': 'active', 'Whole presentation': 'all'}, this.show);
+  return __.selectOptions({'Hidden': 'none', 'Active slide only': 'active', 'Visible': 'all'}, this.show);
 }
 
 Template.keynoteEdit.themeOptions = function () {
-  return __.selectOptions({'Ribbon': 'ribbon', 'Bright': 'bright'}, this.theme);
+  return __.selectOptions(__.keynotes.themes, this.theme);
 }
 
 Template.keynoteEdit.url = function () {
@@ -40,7 +40,7 @@ var _saveKeynote = function (e, template) {
 
       saveKeynote.tUnsaved = Meteor.setTimeout(function () {
         Session.set('_keynoteUnsaved', true);
-      }, 100);
+      }, 500);
 
       var now = $.now();
 
@@ -53,7 +53,7 @@ var _saveKeynote = function (e, template) {
 
         saveKeynote.tSaved = Meteor.setTimeout(function () {
           Session.set('_keynoteUnsaved', false);
-        }, Math.max(500 - ($.now() - now), 0));
+        }, Math.max(1000 - ($.now() - now), 0));
       });
     },
     saveKeynote = _.debounce(_saveKeynote, 500);
@@ -158,12 +158,11 @@ Template.keynoteEdit.events({
 
 Template.keynoteEditSlide.events({
   'click textarea, focus textarea': function () {
-    if (this.i >= 0) {
-      Session.set('keynoteCurrentSlideNumber', this.i);
+    var _keynote = keynote();
 
-      Keynotes.update(keynote()._id, {$set: {
-        currentSlideNumber: this.i
-      }});
+    if (this.i >= 0 && _keynote.show === 'active') {
+      Session.set('keynoteCurrentSlideNumber', this.i);
+      Meteor.call('updateCurrentSlide', _keynote._id, this.i);
     }
   },
   'click .js-move-slide': function (e) {
@@ -177,7 +176,6 @@ Template.keynoteEditSlide.events({
         newIndex = this.i + direction;
 
     console.log('newIndex', newIndex);
-
 
     slides = _.reject(slides, function (slide, i) {
       console.log('slide', slide);
@@ -222,7 +220,7 @@ Template.keynoteEdit.rendered = function () {
     }
 
     if (Session.get('keynoteURLFocus')) {
-      $('#url').select().focus();
+      $url.select().focus();
       Session.set('keynoteURLFocus', false);
     }
 
@@ -246,5 +244,11 @@ Template.keynoteEdit.rendered = function () {
         }
       }
     });
+
+    if (_keynote.show === 'active') {
+      Meteor.call('createCurrentSlide', _keynote._id);
+    } else {
+      Meteor.call('removeCurrentSlide', _keynote._id);
+    }
   }
 };

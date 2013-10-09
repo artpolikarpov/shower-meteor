@@ -1,4 +1,5 @@
 Keynotes = new Meteor.Collection('Keynotes');
+CurrentSlides = new Meteor.Collection('CurrentSlides');
 
 if (Meteor.isServer) {
   Keynotes.allow({
@@ -17,6 +18,8 @@ if (Meteor.isServer) {
 }
 
 __.keynotes = {};
+
+__.keynotes.themes = {'Ribbon': 'ribbon', 'Bright': 'bright'};
 
 __.keynotes.emptySlide = function () {
   return {code: '', class: ''};

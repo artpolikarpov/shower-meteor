@@ -3,7 +3,7 @@
 
   <div class="floor keynotes-list btn-group-vertical btn-block">
     {{#each keynotes}}
-      <a class="btn btn-block btn-{{#unless equal show 'none'}}{{#if equal show 'active'}}success{{else}}info{{/if}}{{else}}default{{/unless}} js-edit"><span class="row">
+      <button class="btn btn-block btn-{{#unless equal show 'none'}}{{#if equal show 'active'}}danger{{else}}default{{/if}}{{else}}none{{/unless}} js-edit"><span class="row">
           <span class="col-xs-10">
             {{#if title}}
               {{title}}{{else}}
@@ -11,7 +11,7 @@
             {{/if}}</span><span class="col-xs-2 text-right">
             <i class="glyphicon glyphicon-chevron-right"></i>
           </span>
-        </span></a>
+        </span></button>
     {{else}}
       {{#if Session 'keynoteListReady'}}
         <p class="lead text-center">No Presentations</p>

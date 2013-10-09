@@ -1,0 +1,10 @@
+.keynotes-list {
+  .btn-none {
+    background-color: #d0d0d0;
+    border-color: #c0c0c0;
+    &:hover, &:active, &:focus {
+      background-color: #c0c0c0;
+      border-color: #b0b0b0;
+    }
+  }
+}
