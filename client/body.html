@@ -61,12 +61,14 @@
               and other cool stuff.</p>
           {{/if}}
         {{else}}
-          {{#if loggingIn}}
-            <br><br>
-            {{> spinner}}
-          {{else}}
-            {{> bodyJumbotron}}
-          {{/if}}
+          {{#isolate}}
+            {{#if loggingIn}}
+              <br><br>
+              {{> spinner}}
+            {{else}}
+              {{> bodyJumbotron}}
+            {{/if}}
+          {{/isolate}}
         {{/if}}
       </div>
     {{/if}}

@@ -69,7 +69,9 @@
   //
 
   Template._loginButtonsLoggedOutDropdown.events({
-    'click #login-buttons-password': function () {
+    'click #login-buttons-password': function (event) {
+      event.preventDefault();
+      event.stopPropagation();
       loginOrSignup();
     },
 

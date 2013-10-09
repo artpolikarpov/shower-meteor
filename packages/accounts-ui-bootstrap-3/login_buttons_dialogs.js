@@ -42,14 +42,16 @@
   }
 
   Template._resetPasswordDialog.events({
-    'click #login-buttons-reset-password-button': function () {
+    'click #login-buttons-reset-password-button': function (event) {
+      event.preventDefault();
       resetPassword();
     },
     'keypress #reset-password-new-password': function (event) {
       if (event.keyCode === 13)
         resetPassword();
     },
-    'click #login-buttons-cancel-reset-password': function () {
+    'click #login-buttons-cancel-reset-password': function (event) {
+      event.preventDefault();
       loginButtonsSession.set('resetPasswordToken', null);
       Accounts._enableAutoLogin();
       $('#login-buttons-reset-password-modal').modal("hide");
@@ -85,14 +87,16 @@
   //
 
   Template._enrollAccountDialog.events({
-    'click #login-buttons-enroll-account-button': function () {
+    'click #login-buttons-enroll-account-button': function (event) {
+      event.preventDefault();
       enrollAccount();
     },
     'keypress #enroll-account-password': function (event) {
       if (event.keyCode === 13)
         enrollAccount();
     },
-    'click #login-buttons-cancel-enroll-account': function () {
+    'click #login-buttons-cancel-enroll-account': function (event) {
+      event.preventDefault();
       loginButtonsSession.set('enrollAccountToken', null);
       Accounts._enableAutoLogin();
     }
@@ -126,7 +130,8 @@
   //
 
   Template._justVerifiedEmailDialog.events({
-    'click #just-verified-dismiss-button': function () {
+    'click #just-verified-dismiss-button': function (event) {
+      event.preventDefault();
       loginButtonsSession.set('justVerifiedEmail', false);
     }
   });
@@ -141,7 +146,8 @@
   //
 
   Template._loginButtonsMessagesDialog.events({
-    'click #messages-dialog-dismiss-button': function () {
+    'click #messages-dialog-dismiss-button': function (event) {
+      event.preventDefault();
       loginButtonsSession.resetMessages();
     }
   });
@@ -157,10 +163,12 @@
   //
 
   Template._configureLoginServiceDialog.events({
-    'click .configure-login-service-dismiss-button': function () {
+    'click .configure-login-service-dismiss-button': function (event) {
+      event.preventDefault();
       loginButtonsSession.set('configureLoginServiceDialogVisible', false);
     },
-    'click #configure-login-service-dialog-save-configuration': function () {
+    'click #configure-login-service-dialog-save-configuration': function (event) {
+      event.preventDefault();
       if (loginButtonsSession.get('configureLoginServiceDialogVisible') &&
           ! loginButtonsSession.get('configureLoginServiceDialogSaveDisabled')) {
         // Prepare the configuration document for this login service
