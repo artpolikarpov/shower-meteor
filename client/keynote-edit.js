@@ -40,7 +40,7 @@ var _saveKeynote = function (e, template) {
 
       saveKeynote.tUnsaved = Meteor.setTimeout(function () {
         Session.set('_keynoteUnsaved', true);
-      }, 500);
+      }, 1000);
 
       var now = $.now();
 
@@ -53,7 +53,7 @@ var _saveKeynote = function (e, template) {
 
         saveKeynote.tSaved = Meteor.setTimeout(function () {
           Session.set('_keynoteUnsaved', false);
-        }, Math.max(1000 - ($.now() - now), 0));
+        }, Math.max(1500 - ($.now() - now), 0));
       });
     },
     saveKeynote = _.debounce(_saveKeynote, 500);
@@ -200,7 +200,7 @@ Template.keynoteEdit.rendered = function () {
   //console.log('Template.keynoteEdit.rendered');
 
   emmet.require('textarea').setup({
-      pretty_break: true,
+      pretty_break: false,
       use_tab: true
   });
 

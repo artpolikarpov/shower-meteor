@@ -1,0 +1,16 @@
+.slide {
+  visibility: hidden;
+}
+
+body.full .slide.active,
+body.list .slide {
+  visibility: visible;
+}
+
+body.full .slide.active {
+  margin: 0 !important;
+}
+
+.slide p:empty {
+  display: none;
+}
