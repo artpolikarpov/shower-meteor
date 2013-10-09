@@ -19,6 +19,12 @@ Template.body.keynoteURL = function () {
 }
 
 Template.body.events({
+  'click .navbar': function (e) {
+    console.log('click .navbar', e.target);
+    if ($(e.target).is('.js-scroll-top')) {
+      __.scrollToTop();
+    }
+  },
   'click .js-back': function (e) {
     e.preventDefault();
 
