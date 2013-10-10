@@ -20,7 +20,6 @@ Template.body.keynoteURL = function () {
 
 Template.body.events({
   'click .navbar': function (e) {
-    console.log('click .navbar', e.target);
     if ($(e.target).is('.js-scroll-top')) {
       __.scrollToTop();
     }
@@ -35,10 +34,15 @@ Template.body.events({
     });
   },
   'click .js-new': function () {
-    Meteor.call('addNewKeynote', function (err, _id) {
-      Session.set('keynoteEdit', _id);
-      Session.set('keynoteFirstFocus', true);
+    var _id = Keynotes.insert(__.keynotes.emptyKeynote(), function (err) {
+      if (err) {
+        console.log(err);
+        Template.body.$backToList();
+      }
     });
+
+    Session.set('keynoteEdit', _id);
+    Session.set('keynoteFirstFocus', true);
   },
   'click .js-save': function () {
     $('form input').change();

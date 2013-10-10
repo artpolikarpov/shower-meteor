@@ -3,6 +3,9 @@ CurrentSlides = new Meteor.Collection('CurrentSlides');
 
 if (Meteor.isServer) {
   Keynotes.allow({
+    insert: function (userId, doc) {
+      return userId && _.isEqual(_.omit(doc, 'createdAt', '_id'), _.omit(__.keynotes.emptyKeynote(), 'createdAt'));
+    },
     update: function (userId, doc, fields, modifier) {
       // can only change your own docs
       return userId === doc.userId
