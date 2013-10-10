@@ -1,7 +1,10 @@
 Meteor.startup(function () {
   Meteor.AppCache.config({
     onlineOnly: [
-      '/shower/'
+      '/shower/',
+      '.gitignore',
+      'Gruntfile.js',
+      'package.json'
     ]
   });
 });

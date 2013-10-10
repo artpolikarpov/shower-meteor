@@ -6,36 +6,19 @@ module.exports = function (grunt) {
       options: {
         key: '<%= grunt.file.readJSON("secret.json").s3.key %>',
         secret: '<%= grunt.file.readJSON("secret.json").s3.secret %>',
-        bucket: 'fotorama',
+        bucket: 'shower-themes',
         access: 'public-read',
         gzip: true,
         secure: false
       },
-      product: {
+      themes: {
         options: {
           headers: {'Cache-Control': 'max-age=2592000'}
         },
         upload: [
-            // Separate version to separate folder
           {
-            src: 'product/*',
-            dest: '<%= pkg.version %>/'
-          }
-        ]
-      },
-      edge: {
-        // Latest to the root
-        options: {
-          headers: {'Cache-Control': 'max-age=1'}
-        },
-        upload: [
-          {
-            src: 'product/fotorama.*',
-            dest: ''
-          },
-          {
-            src: 'product/fotorama@2x.png',
-            dest: 'fotorama@2x.png'
+            src: 'shower/themes/**',
+            dest: '/'
           }
         ]
       }
