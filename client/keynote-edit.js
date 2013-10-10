@@ -160,8 +160,10 @@ Template.keynoteEditSlide.events({
   'click textarea, focus textarea': function () {
     var _keynote = keynote();
 
+
+    Session.set('keynoteCurrentSlideNumber', this.i);
+
     if (this.i >= 0 && _keynote.show === 'active') {
-      Session.set('keynoteCurrentSlideNumber', this.i);
       Meteor.call('updateCurrentSlide', _keynote._id, this.i);
     }
   },
