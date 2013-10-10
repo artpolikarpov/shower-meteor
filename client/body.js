@@ -12,6 +12,8 @@ Template.body.$backToList = function () {
   Session.set('keynoteCurrentSlideNumber', false);
   Session.set('_keynoteUnsaved', false);
   Session.set('keynoteShow', false);
+
+  __.scrollToTop(100);
 }
 
 Template.body.keynoteURL = function () {
