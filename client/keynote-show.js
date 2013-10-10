@@ -68,7 +68,7 @@ Template.keynoteShow.rendered = function () {
       .siblings('link.js-stylesheet')
       .attr('disabled', true);
 
-  document.title = _keynote.title || 'shwr.tv';
+  document.title = _keynote.title || 'Sho.io';
 
   shower._addEventListeners(false);
   shower.on = false;
