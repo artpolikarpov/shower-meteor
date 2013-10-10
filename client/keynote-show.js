@@ -24,8 +24,11 @@ Template.keynoteShow.keynote = function () {
   if (!_keynote) return;
 
   _keynote.slides = _.map(_keynote.slides, function (slide, i) {
+    var _isGuest = isGuest(_keynote),
+        active = (currentSlide = CurrentSlides.findOne()) && i === (currentSlide.currentSlide >= 0 ? currentSlide.currentSlide || 0 : 0);
     return _.extend(slide, {
-      active: isGuest(_keynote) && (currentSlide = CurrentSlides.findOne()) && i === (currentSlide.currentSlide >= 0 ? currentSlide.currentSlide || 0 : 0) ? 'active' : ''
+      code: !_isGuest || active ? slide.code : '',
+      active: _isGuest && active ? 'active' : ''
     });
   });
 
