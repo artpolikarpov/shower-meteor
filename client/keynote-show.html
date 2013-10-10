@@ -1,8 +1,8 @@
 <template name="keynoteShow">
   {{#each themes}}
-    <link rel="stylesheet" href="/shower/themes/{{theme}}/styles/screen.css" id="{{theme}}-theme" class="js-stylesheet" disabled="disabled" />
+    <link rel="stylesheet" href="{{__ 's3URL'}}/{{theme}}/styles/screen.css" id="{{theme}}-theme" class="js-stylesheet" disabled="disabled" />
   {{/each}}
-  <link rel="stylesheet" href="/shower/themes/themes-override.css" />
+  <link rel="stylesheet" href="{{__ 's3URL'}}/themes-override.css" />
 
 	{{#with keynote}}
     <div class="{{theme}} hide"></div> {{! Don’t remove, it’s for theme refreshing}}
