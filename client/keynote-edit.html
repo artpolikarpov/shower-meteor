@@ -60,19 +60,26 @@
       {{/each}}
 		</form>
 
-    {{#if Session 'keynoteEditReady'}}
-    <hr>
+    <p class="alert alert-info">
+      <strong>Be prepared!</strong> Usually Wi-Fi works very poorly at tech conferences.
+      Print your presentation to PDF using Google Chrome “Print to PDF”.
+      See <a href="https://github.com/shower/shower/wiki/Print" target="_blank">more detais on printing</a> in documentation.
+    </p>
 
-		<div class="form-group clearfix">
-      <div class="btn-group pull-right">
-        {{#if Session 'keynoteToRemove'}}
-          <button class="btn btn-danger js-remove"><i class="glyphicon glyphicon-trash"></i> Sure, remove</button>
-          <button class="btn btn-default js-no-remove"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
-        {{else}}
-          <button class="btn js-to-remove"><i class="glyphicon glyphicon-trash"></i> Remove Presentation</button>
-        {{/if}}
+    {{#if Session 'keynoteEditReady'}}
+
+      <hr>
+
+      <div class="form-group clearfix">
+        <div class="btn-group pull-right">
+          {{#if Session 'keynoteToRemove'}}
+            <button class="btn btn-danger js-remove"><i class="glyphicon glyphicon-trash"></i> Sure, remove</button>
+            <button class="btn btn-default js-no-remove"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
+          {{else}}
+            <button class="btn js-to-remove"><i class="glyphicon glyphicon-trash"></i> Remove Presentation</button>
+          {{/if}}
+        </div>
       </div>
-		</div>
     {{/if}}
 
     <br><br>
