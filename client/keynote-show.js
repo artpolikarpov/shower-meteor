@@ -92,8 +92,6 @@ Template.keynoteShow.rendered = function () {
         .on('resize', shower._listeners['window resize'])
         .resize();
 
-    console.log(_currentSlide && _currentSlide.currentSlide, _keynote.slides.length);
-
     _currentSlide && shower.updateProgress(_currentSlide.currentSlide, _keynote.slides.length);
   } else {
     __.$body

@@ -6569,6 +6569,18 @@ h6:first-child,
   height: 575px;
 }
 
+.slide.scale-1-5 > div {
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+  max-width: 566.66667px;
+  max-height: 383.33333px;
+  padding: 33.33333px 50px 0 50px;
+}
+
 .slide.scale-2 > div {
   -webkit-transform-origin: 0 0;
   -ms-transform-origin: 0 0;
@@ -6581,6 +6593,18 @@ h6:first-child,
   padding: 25px 37.5px 0 37.5px;
 }
 
+.slide.scale-2-5 > div {
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scale(2.5);
+  -ms-transform: scale(2.5);
+  transform: scale(2.5);
+  max-width: 340px;
+  max-height: 230px;
+  padding: 20px 30px 0 30px;
+}
+
 .slide.scale-3 > div {
   -webkit-transform-origin: 0 0;
   -ms-transform-origin: 0 0;
@@ -6590,7 +6614,7 @@ h6:first-child,
   transform: scale(3);
   max-width: 283.33333px;
   max-height: 191.66667px;
-  padding: 16.5px 25px 0 25px;
+  padding: 16.66667px 25px 0 25px;
 }
 
 .slide *,
@@ -6670,12 +6694,36 @@ h6:first-child,
   -webkit-transform-origin: 50% 50%;
   -ms-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
+  width: auto;
+  height: auto;
+}
+
+.slide.shout.scale-1 > div {
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  -ms-transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
+  padding: 50px;
+}
+
+.slide.shout.scale-1-5 > div {
+  -webkit-transform: translate(-50%, -50%) scale(1.5);
+  -ms-transform: translate(-50%, -50%) scale(1.5);
+  transform: translate(-50%, -50%) scale(1.5);
+  padding: 33.33333px;
+}
+
+.slide.shout > div {
   -webkit-transform: translate(-50%, -50%) scale(2);
   -ms-transform: translate(-50%, -50%) scale(2);
   transform: translate(-50%, -50%) scale(2);
-  width: auto;
-  height: auto;
   padding: 25px;
+}
+
+.slide.shout.scale-2-5 > div {
+  -webkit-transform: translate(-50%, -50%) scale(2.5);
+  -ms-transform: translate(-50%, -50%) scale(2.5);
+  transform: translate(-50%, -50%) scale(2.5);
+  padding: 20px;
 }
 
 .slide.shout.scale-3 > div {
