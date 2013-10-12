@@ -76,15 +76,15 @@ var removeSlide = function (i) {
     $set.currentSlideNumber = 0;
   }
 
-  Keynotes.update(_keynote._id, {$set: $set});
   Session.set('keynoteToRemoveSlide', false);
   Session.set('keynoteCurrentSlideNumber', false);
+  Keynotes.update(_keynote._id, {$set: $set});
 }
 
 var removePresentation = function (_id) {
+  Session.set('keynoteToRemove', false);
   Keynotes.remove(_id);
   Template.body.$backToList();
-  Session.set('keynoteToRemove', false);
 }
 
 Template.keynoteEdit.events({
@@ -98,6 +98,9 @@ Template.keynoteEdit.events({
     }
   },
   'click .js-to-remove': function (e, template) {
+    e.preventDefault();
+    e.stopPropagation();
+
     if (!_.some(_.omit(__.serializeForm(template.find('form')), 'show', 'url', 'theme', 'title'))
         && (!this.title || this.title === __.keynotes.emptyKeynote().title)) {
       // remove immediately if empty
@@ -106,10 +109,16 @@ Template.keynoteEdit.events({
       Session.set('keynoteToRemove', true);
     }
   },
-  'click .js-no-remove': function () {
+  'click .js-no-remove': function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     Session.set('keynoteToRemove', false);
   },
-  'click .js-remove': function () {
+  'click .js-remove': function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     removePresentation(this._id);
   },
   'click .js-add-slide': function (e) {
@@ -122,11 +131,13 @@ Template.keynoteEdit.events({
     slides.splice(newIndex, 0, __.keynotes.emptySlide());
     $set.slides = slides;
 
-    Keynotes.update(_keynote._id, {$set: $set});
+    console.log('newIndex', newIndex);
+
     Session.set('keynoteSlideFocus', newIndex);
+    Keynotes.update(_keynote._id, {$set: $set});
   },
   'click .js-to-remove-slide': function (e) {
-    //console.log('click .js-to-remove-slide', this.i);
+    console.log('click .js-to-remove-slide', this, this.i);
 
     e.preventDefault();
     e.stopPropagation();
@@ -157,13 +168,9 @@ Template.keynoteEdit.events({
 
     Session.set('keynoteEditURL', flag);
     Session.set('keynoteURLFocus', flag);
-  }
-});
-
-Template.keynoteEditSlide.events({
-  'click, focus': function () {
+  },
+  'click .one-slide, focus .one-slide': function () {
     var _keynote = keynote();
-
 
     Session.set('keynoteCurrentSlideNumber', this.i);
 
@@ -198,8 +205,8 @@ Template.keynoteEditSlide.events({
 
     $set.slides = slides;
 
-    Keynotes.update(_keynote._id, {$set: $set});
     Session.set('keynoteSlideFocus', newIndex);
+    Keynotes.update(_keynote._id, {$set: $set});
   }
 });
 
@@ -232,7 +239,7 @@ Template.keynoteEdit.rendered = function () {
     }
 
     if (Session.get('keynoteSlideFocus') >= 0) {
-      $('textarea', this.find('form')).eq(Session.get('keynoteSlideFocus')).select().focus();
+      $('.one-slide textarea', this.find('form')).eq(Session.get('keynoteSlideFocus')).select().focus();
       Session.set('keynoteSlideFocus', -1);
     }
   }
