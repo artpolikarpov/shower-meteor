@@ -72,10 +72,7 @@
             <br><br>
             <hr>
             <p class="text-center">Sho.io is an open-souce <abbr>HTML</abbr> presentation app.
-              Built with <a href="http://meteor.com/" target="_blank">Meteor</a>,
-              <a href="http://shwr.me/" target="_blank">Shower</a>,
-              <a href="http://emmet.io/" target="_blank">Emmet</a>,
-              and other cool stuff.</p>
+              {{> bodyBuiltWith}}</p>
           {{/if}}
         {{else}}
           {{#isolate}}
@@ -97,11 +94,16 @@
     <div class="container">
       <h1>Sho.io</h1>
       <p>An open-souce <abbr>HTML</abbr> presentation app.
-        Built with <a href="http://meteor.com/" target="_blank">Meteor</a>,
-        <a href="http://shwr.me/" target="_blank">Shower</a>,
-        <a href="http://emmet.io/" target="_blank">Emmet</a>,
-        and other cool stuff.</p>
+        {{> bodyBuiltWith}}</p>
       <p><br></p>
     </div>
   </div>
+</template>
+
+<template name="bodyBuiltWith">
+  Built with 
+  <a href="http://shwr.me/" target="_blank">Shower</a>,
+  <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>,
+  <a href="http://meteor.com/" target="_blank">Meteor</a>,
+  and other cool stuff.
 </template>

@@ -54,7 +54,7 @@ __.keynotes.emptyKeynote = function () {
     slides: slides,
     createdAt: +new Date,
     show: 'none',
-    theme: 'ribbon'
+    theme: 'bootstrap-3'
   }
 };
 
