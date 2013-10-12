@@ -54,6 +54,16 @@ module.exports = function (grunt) {
             src: 'shower/themes/*',
             dest: '/'
           },
+          // Bootstrap 3
+          {
+            src: 'shower/themes/bootstrap-3/fonts/*',
+            dest: '/bootstrap-3/fonts/'
+          },
+          {
+            src: 'shower/themes/bootstrap-3/styles/*.css',
+            dest: '/bootstrap-3/styles/'
+          },
+
           // Bright
           {
             src: 'shower/themes/bright/fonts/*',
@@ -64,7 +74,7 @@ module.exports = function (grunt) {
             dest: '/bright/images/'
           },
           {
-            src: 'shower/themes/bright/styles/*',
+            src: 'shower/themes/bright/styles/*.css',
             dest: '/bright/styles/'
           },
 
@@ -78,7 +88,7 @@ module.exports = function (grunt) {
             dest: '/ribbon/images/'
           },
           {
-            src: 'shower/themes/ribbon/styles/*',
+            src: 'shower/themes/ribbon/styles/*.css',
             dest: '/ribbon/styles/'
           }
         ]
