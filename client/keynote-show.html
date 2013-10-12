@@ -1,33 +1,39 @@
 <template name="keynoteShow">
   {{#each themes}}
-    <link rel="stylesheet" href="{{__ 's3URL'}}/{{theme}}/styles/screen.css" id="{{theme}}-theme" class="js-stylesheet" disabled="disabled" />
+    <link rel="stylesheet" href="{{__ 's3URL'}}/{{theme}}/styles/screen.css?{{cacheStamp}}" id="{{theme}}-theme" class="js-stylesheet" disabled="disabled" />
   {{/each}}
-  <link rel="stylesheet" href="{{__ 's3URL'}}/themes-override.css" />
+  <link rel="stylesheet" href="{{__ 's3URL'}}/themes-override.css?{{cacheStamp}}" />
 
 	{{#isolate}}
-  {{#with keynote}}
-    <div class="{{theme}} hide"></div> {{! Don’t remove, it’s for theme refreshing}}
+    {{#with keynote}}
+      <div class="{{theme}} hide"></div> {{! Don’t remove, it’s for theme refreshing}}
 
-    {{#unless isGuest}}
-      <header class="caption">
-        <h1>{{title}}</h1>
-        <p>{{{tagline}}}</p>
-      </header>
-    {{/unless}}
+      {{#unless isGuest}}
+        <header class="caption">
+          <h1>{{title}}</h1>
+          <p>{{{tagline}}}</p>
+        </header>
+      {{/unless}}
 
-    {{#each slides}}
-      <section class="slide {{class}} {{active}}"><div>
-        {{#markdown}}{{{code}}}{{/markdown}}
-      </div></section>
-    {{/each}}
-  {{else}}
-    {{#if Session 'keynoteShowReady'}}
-      <p class="lead text-center"><strong>404.</strong> Nothing here</p>
-      <p class="text-center"><a href="/">Sho.io</a></p>
+      {{#each slides}}
+        <section class="slide {{class}} {{active}}"><div>
+          {{#markdown}}{{{safeCode}}}{{/markdown}}
+        </div></section>
+      {{/each}}
+
+      <div style="display: none;">
+        <!-- Hidden preloader -->
+        {{#each slides}}{{#markdown}}{{{code}}}{{/markdown}}{{/each}}
+      </div>
     {{else}}
-      {{> spinner}}
-    {{/if}}
-  {{/with}}
+      {{#if Session 'keynoteShowReady'}}
+        <p class="lead text-center"><strong>404.</strong> Nothing here</p>
+        <p class="text-center"><a href="/">Sho.io</a></p>
+      {{else}}
+        {{> spinner}}
+      {{/if}}
+    {{/with}}
   {{/isolate}}
+
   <div class="progress"><div></div></div>
 </template>

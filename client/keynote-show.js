@@ -31,6 +31,7 @@ Template.keynoteShow.keynote = function () {
         active = (_currentSlide = currentSlide()) && i === (_currentSlide.currentSlide >= 0 ? _currentSlide.currentSlide || 0 : 0);
     return _.extend(slide, {
       active: _isGuest && active ? 'active' : '',
+      safeCode: !_isGuest || active ? slide.code : '',
       'class': (slide.class || '').replace(/\.|,/g, ' ').split(' ').join(' ')
     });
   });
@@ -82,7 +83,7 @@ Template.keynoteShow.rendered = function () {
   if (isGuest(_keynote)) {
     __.$body
         .removeClass('list')
-        .addClass('full');
+        .addClass('full guest');
 
     shower.guest = true;
 

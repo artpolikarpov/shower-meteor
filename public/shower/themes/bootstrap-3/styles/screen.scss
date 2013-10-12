@@ -343,12 +343,15 @@ footer {
       }
     }
     // Progress
-    .progress {
+    > .progress {
       position: absolute;
       right: 0;
       bottom: 0;
       left: 0;
       z-index: 1;
+      height: 4px;
+      margin: 0;
+      border-radius: 0;
       div {
         position: absolute;
         left: 0;

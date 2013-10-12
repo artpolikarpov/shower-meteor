@@ -1,3 +1,4 @@
 npm-debug.log
 secret.json
 node_modules
+.sass-cache

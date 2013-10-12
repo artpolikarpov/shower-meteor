@@ -12,6 +12,7 @@ body.full .slide.active {
   margin: 0 !important;
 }
 
-.slide p:empty {
+.slide p:empty,
+body.guest .slide:not(.active) {
   display: none;
 }
