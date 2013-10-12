@@ -1,6 +1,6 @@
 __.selectOptions = function (options, selected) {
   return _.map(options, function (value, key) {
-    var _selected = selected === value;
+    var _selected = selected === value || selected === key;
 
     return _.extend({
       value: value,

@@ -1,0 +1,369 @@
+// Bright theme for Shower HTML presentation engine: github.com/shower/shower
+// Copyright © 2010–2013 Vadim Makeev, pepelsbey.net
+// Licensed under MIT license: github.com/shower/shower/wiki/MIT-License
+
+@import 'defaults';
+@import 'boostrap/bootstrap';
+
+body {
+  counter-reset: slide;
+  font-size: 24px;
+}
+
+// Caption
+// -------------------------------
+.caption {
+  display: none;
+  margin: 0 0 60px;
+  padding: 0 $list-gap 0 0;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+// Slide
+// -------------------------------
+.slide {
+  position: relative;
+  width: $width;
+  height: $height;
+  color: $text-color;
+  background: $body-bg;
+  -webkit-print-color-adjust: exact;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  // Number
+  &:after {
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+    left: 0;
+    color: #aaa;
+    counter-increment: slide;
+    content: counter(slide);
+    text-align: center;
+    line-height: 1;
+    font-size: 75%;
+  }
+  // Inner
+  $inner-width: $width - $slide-gap*3;
+  $inner-height: $height - $slide-gap;
+
+  > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    padding: $slide-gap $slide-gap*1.5 0 $slide-gap*1.5;
+    width: $inner-width;
+    height: $inner-height;
+  }
+
+  &.scale-2 {
+    > div {
+      transform-origin: 0 0;
+      transform: scale(2);
+      max-width: $inner-width / 2;
+      max-height: $inner-height / 2;
+      padding: $slide-gap*.5 $slide-gap*.75 0 $slide-gap*.75;
+
+    }
+  }
+
+  &.scale-3 {
+    > div {
+      transform-origin: 0 0;
+      transform: scale(3);
+      max-width: $inner-width / 3;
+      max-height: $inner-height / 3;
+      padding: $slide-gap*.33 $slide-gap*.5 0 $slide-gap*.5;
+    }
+  }
+}
+
+// Elements
+// -------------------------------
+.slide {
+  *,
+  *:before,
+  *:after {
+    box-sizing: content-box;
+  }
+
+// Cover Shout
+&.cover,
+&.shout {
+  z-index: 1;
+  &:after {
+    content: '';
+  }
+}
+
+&.inverse {
+  color: $text-color-inverse;
+  background: $body-bg-inverse;
+}
+
+// Cover
+&.cover {
+  @mixin cover {
+    img, svg, video,
+    object, canvas {
+      @content;
+    }
+  }
+  @include cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  &.w {
+    @include cover {
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+    }
+  }
+  &.h {
+    @include cover {
+      left: 50%;
+      height: 100%;
+      transform: translateX(-50%);
+    }
+  }
+  &.w.h {
+    @include cover {
+      top: 0;
+      left: 0;
+      transform: none;
+    }
+  }
+}
+
+// Shout
+&.shout {
+  > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 50%;
+    transform: translate(-50%, -50%) scale(2);
+    width: auto;
+    height: auto;
+    padding: $slide-gap / 2;
+  }
+  &.scale-3 {
+    > div {
+      transform: translate(-50%, -50%) scale(3);
+      padding: $slide-gap / 3;
+    }
+  }
+}
+
+// Place
+.place {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &.t.l, &.t.r, &.b.r, &.b.l {
+    transform: none;
+  }
+  &.t, &.b {
+    transform: translate(-50%, 0);
+  }
+  &.l, &.r {
+    transform: translate(0, -50%);
+  }
+  &.t, &.t.l, &.t.r {
+    top: 0;
+  }
+  &.r {
+    right: 0;
+    left: auto;
+  }
+  &.b, &.b.r, &.b.l {
+    top: auto;
+    bottom: 0;
+  }
+  &.l {
+    left: 0;
+  }
+}
+
+// Notes
+footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -$height;
+  z-index: 1;
+  display: none;
+  padding: 20px $slide-gap 20px $slide-gap;
+  background: #fafac4;
+  box-shadow: 0 0 0 2px rgba(#000, 0.05);
+  transition: bottom 0.3s;
+}
+
+&:hover footer {
+  bottom: 0;
+}
+
+  }
+
+// Screen
+@media screen {
+// List
+  .list {
+    position: absolute;
+    min-width: 100%;
+    padding: $list-gap 0 $list-gap $list-gap;
+    text-align: left;
+
+    // Outfit
+    .caption {
+      display: block;
+    }
+    // Slide
+    .slide {
+      // Gap between slides
+      position: relative;
+      top: $height/2 - $list-gap;
+      display: inline-block;
+      margin: ($list-gap - $height/2) ($list-gap - $width/2) 0 0;
+      text-align: left;
+      transform-origin: 0 0;
+      transform: scale(0.5);
+      @media (max-width: $break) {
+        top: $height/2 + $height/4 - $list-gap;
+        margin: ($list-gap - ($height/2 + $height/4)) ($list-gap - ($width/2 + $width/4)) 0 0;
+        transform: scale(0.25);
+      }
+      // Frame
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: $width/2;
+        height: $height/2;
+        box-shadow: 0 0 0 1px #DDD;
+        content: '';
+        transform-origin: 0 0;
+        transform: scale(2);
+        @media (max-width: $break) {
+          width: $width/4;
+          height: $height/4;
+          transform: scale(4);
+        }
+      }
+      // Number
+      &:after {
+        bottom: 25px;
+        font-size: 100%;
+        @media (max-width: $break) {
+          width: $width/2;
+          bottom: 50px;
+          transform-origin: 0 0;
+          transform: scale(2);
+        }
+      }
+      // Current
+      &:target {
+        &:before {
+          box-shadow: 0 0 0 4px $color;
+        }
+      }
+
+      // Hover
+      &:hover:not(.active) {
+        cursor: pointer;
+        &:before {
+          box-shadow: 0 0 0 4px rgba($color, .5);
+        }
+      }
+
+      // Inner
+      > div {
+        &:before {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 2;
+          content: '';
+        }
+      }
+      // Cover Shout
+      &.cover,
+      &.shout {
+        &:after {
+          content: counter(slide);
+        }
+      }
+      // Notes
+      footer {
+        display: block;
+      }
+    }
+  }
+// Full
+  .full {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    margin: (-$height/2) 0 0 (-$width/2);
+    width: $width;
+    height: $height;
+    background: #000;
+    // Slide
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-left: 150%;
+      // Next
+      .next {
+        visibility: hidden;
+        &.active {
+          visibility: visible;
+        }
+      }
+      // Current
+      &:target {
+        margin: 0;
+      }
+    }
+    // Progress
+    .progress {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      div {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 4px;
+        background: $color;
+        transition: width 0.2s linear;
+      }
+    }
+  }
+}
+
+// Print
+@page {
+  margin: 0;
+  size: $width $height;
+}

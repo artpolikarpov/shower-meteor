@@ -9,6 +9,9 @@ Meteor.autosubscribe(function () {
 var keynote = function () {
       return Keynotes.findOne({$or: [{_id: Session.get('keynoteShow')}, {url: Session.get('keynoteShow')}]});
     },
+    currentSlide = function () {
+      return CurrentSlides.findOne();
+    },
     isGuest = function (keynote) {
       return keynote && keynote.userId !== Meteor.userId() && keynote.show === 'active';
     };
@@ -19,16 +22,16 @@ Template.keynoteShow.cacheStamp = function () {
 
 Template.keynoteShow.keynote = function () {
   var _keynote = keynote(),
-      currentSlide;
+      _currentSlide;
 
   if (!_keynote) return;
 
   _keynote.slides = _.map(_keynote.slides, function (slide, i) {
     var _isGuest = isGuest(_keynote),
-        active = (currentSlide = CurrentSlides.findOne()) && i === (currentSlide.currentSlide >= 0 ? currentSlide.currentSlide || 0 : 0);
+        active = (_currentSlide = currentSlide()) && i === (_currentSlide.currentSlide >= 0 ? _currentSlide.currentSlide || 0 : 0);
     return _.extend(slide, {
-      code: !_isGuest || active ? slide.code : '',
-      active: _isGuest && active ? 'active' : ''
+      active: _isGuest && active ? 'active' : '',
+      'class': (slide.class || '').replace(/\.|,/g, ' ').split(' ').join(' ')
     });
   });
 
@@ -36,8 +39,8 @@ Template.keynoteShow.keynote = function () {
 };
 
 Template.keynoteShow.themes = function () {
-  return _.map(__.keynotes.themes, function (value) {
-    return {theme: value};
+  return _.map(__.keynotes.themes, function (value, key) {
+    return {theme: key};
   });
 };
 
@@ -52,21 +55,23 @@ Template.keynoteShow.ready = function () {
 Template.keynoteShow.rendered = function () {
   if (!$('.slide').length) return;
 
-  var _keynote = keynote();
-
-  __.waitFor(function () {
-      var $slide = $('.slide');
-      return 1024 === $slide.width() && 640 === $slide.height(); // TODO: no hard-coding, please
-  }, function () {
-    $('head > link[rel="stylesheet"]').attr('disabled', true);
-    shower._listeners['window resize']();
-    Session.set('keynoteThemeLoaded', true);
-  });
+  var _keynote = keynote(),
+      _currentSlide = currentSlide();
 
   $('#' + _keynote.theme + '-theme')
       .attr('disabled', false)
       .siblings('link.js-stylesheet')
       .attr('disabled', true);
+
+  __.waitFor(function () {
+      var $slide = $('.slide'),
+          ratio = $slide.width() / $slide.height();
+      return (ratio === 16 / 10 || ratio === 4 / 3);
+  }, function () {
+    $('head > link[rel="stylesheet"]').attr('disabled', true);
+    shower._listeners['window resize']();
+    Session.set('keynoteThemeLoaded', true);
+  });
 
   document.title = _keynote.title || 'Sho.io';
 
@@ -83,7 +88,12 @@ Template.keynoteShow.rendered = function () {
 
     __.$window
         .off('resize', shower._listeners['window resize'])
-        .on('resize', shower._listeners['window resize']);
+        .on('resize', shower._listeners['window resize'])
+        .resize();
+
+    console.log(_currentSlide && _currentSlide.currentSlide, _keynote.slides.length);
+
+    _currentSlide && shower.updateProgress(_currentSlide.currentSlide, _keynote.slides.length);
   } else {
     __.$body
         .removeClass('full')

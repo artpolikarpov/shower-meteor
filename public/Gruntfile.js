@@ -2,7 +2,39 @@ module.exports = function (grunt) {
   'use strict';
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    // Compile themes
+    less: {
+      bootstrap: {
+        files: {
+          'shower/themes/bootstrap-3/styles/boostrap/bootstrap.scss': 'shower/themes/bootstrap-3/styles/boostrap/bootstrap.less'
+        }
+      }
+    },
+    sass: {
+      bootstrap: {
+        files: {
+          'shower/themes/bootstrap-3/styles/screen.css': 'shower/themes/bootstrap-3/styles/screen.scss'
+        }
+      }
+    },
+    autoprefixer: {
+      bootstrap: {
+        files: {
+          'shower/themes/bootstrap-3/styles/screen.css': 'shower/themes/bootstrap-3/styles/screen.css'
+        }
+      }
+    },
+    watch: {
+      options: {
+        atBegin: true
+      },
+      bootstrap: {
+        files: ['shower/themes/bootstrap-3/fonts/*', 'shower/themes/bootstrap-3/styles/*.scss', 'shower/themes/bootstrap-3/styles/boostrap/*.less'],
+        tasks: ['less:bootstrap', 'sass:bootstrap', 'autoprefixer:bootstrap']
+      }
+    },
     s3: {
+      // Upload themes
       options: {
         key: '<%= grunt.file.readJSON("secret.json").s3.key %>',
         secret: '<%= grunt.file.readJSON("secret.json").s3.secret %>',
@@ -55,6 +87,9 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-s3');
 
 };

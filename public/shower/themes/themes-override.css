@@ -3,7 +3,8 @@
 }
 
 body.full .slide.active,
-body.list .slide {
+body.list .slide,
+body.full .slide {
   visibility: visible;
 }
 

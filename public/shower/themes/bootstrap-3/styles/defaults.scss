@@ -1,0 +1,32 @@
+// Bright theme for Shower HTML presentation engine: github.com/shower/shower
+// Copyright © 2010–2013 Vadim Makeev, pepelsbey.net
+// Licensed under MIT license: github.com/shower/shower/wiki/MIT-License
+
+// Colors
+$color: #428bca;
+
+$body-bg: #fff;
+$text-color: #000;
+
+$body-bg-inverse: #000;
+$text-color-inverse: #fff;
+
+
+$list-gap: 30px;
+$slide-gap: 50px;
+
+$break: 1180px;
+// Window width for small thumbnails to appear
+
+// Slide Dimentions
+$width: 1000px;
+$height: $width / (16/10);
+
+$ratio: '16x10';
+
+// Mixins
+@mixin retina {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @content;
+  }
+}

@@ -11,8 +11,8 @@ window.shower = window.shower || (function (window, document, undefined) {
       },
       url = window.location,
       options = typeof showerOptions !== 'undefined' ? showerOptions : {},
-      slides = [],
-      progress = [],
+      slides,
+      progress,
       timer,
       isHistoryApiSupported = !!(window.history && window.history.pushState);
 
@@ -185,13 +185,20 @@ window.shower = window.shower || (function (window, document, undefined) {
 
   shower.slideList = [];
 
+
+  shower._querySlides = function () {
+    return slides = document.querySelectorAll('.slide');
+  }
+
+  shower._queryProgress = function () {
+    return progress = document.querySelector('div.progress div');
+  }
+
   /**
    * Shower initialization
-   * @param {String} [slideSelector]
-   * @param {String} [progressSelector]
    * @returns {Object} shower
    */
-  shower.init = function (slideSelector, progressSelector) {
+  shower.init = function () {
     if (!shower.on) {
       shower.on = true;
 
@@ -204,11 +211,8 @@ window.shower = window.shower || (function (window, document, undefined) {
 
       var timing;
 
-      slideSelector = slideSelector || '.slide';
-      progressSelector = progressSelector || 'div.progress div';
-
-      slides = document.querySelectorAll(slideSelector);
-      progress = document.querySelector(progressSelector);
+      shower._querySlides();
+      shower._queryProgress();
 
       for (var i = 0; i < slides.length; i++) {
         // Slide IDs are optional.
@@ -332,19 +336,22 @@ window.shower = window.shower || (function (window, document, undefined) {
    * Normalize slide number.
    * @private
    * @param {Number} slideNumber slide number (sic!)
+   * @param {Number} [slideListLength]
    * @returns {Number}
    */
-  shower._normalizeSlideNumber = function (slideNumber) {
+  shower._normalizeSlideNumber = function (slideNumber, slideListLength) {
     if (!shower._isNumber(slideNumber)) {
       throw new Error('Gimme slide number as Number, baby!');
     }
+
+    slideListLength = slideListLength || shower.slideList.length;
 
     if (slideNumber < 0) {
       slideNumber = 0;
     }
 
-    if (slideNumber >= shower.slideList.length) {
-      slideNumber = shower.slideList.length - 1;
+    if (slideNumber >= slideListLength) {
+      slideNumber = slideListLength;
     }
 
     return slideNumber;
@@ -594,6 +601,8 @@ window.shower = window.shower || (function (window, document, undefined) {
       callback();
     }
 
+    window.scrollTo(0, 0);
+
     return true;
   };
 
@@ -724,19 +733,18 @@ window.shower = window.shower || (function (window, document, undefined) {
   /**
    * Update progress bar.
    * @param {Number} slideNumber slide number (sic!)
+   * @param {Number} [slideListLength]
    * @returns {Boolean}
    */
-  shower.updateProgress = function (slideNumber) {
-    // if progress bar doesn't exist
-    if (null === progress) {
+  shower.updateProgress = function (slideNumber, slideListLength) {
+    if (!progress && !shower._queryProgress()) {
       return false;
     }
 
     if (!shower._isNumber(slideNumber)) {
       throw new Error('Gimme slide number as Number, baby!');
     }
-
-    progress.style.width = (100 / (shower.slideList.length - 1) * shower._normalizeSlideNumber(slideNumber)).toFixed(2) + '%';
+    progress.style.width = (100 / ((slideListLength || shower.slideList.length) - 1) * shower._normalizeSlideNumber(slideNumber, slideListLength)).toFixed(2) + '%';
 
     return true;
   };
@@ -804,7 +812,7 @@ window.shower = window.shower || (function (window, document, undefined) {
 
       if (nextSlideId) {
 
-        var next = document.getElementById(nextSlideId).querySelector('h2');
+        var next = document.getElementById(nextSlideId).querySelector('h1, h2');
 
         if (next) {
           next = next.innerHTML.replace(/^\s+|<[^>]+>/g, '');

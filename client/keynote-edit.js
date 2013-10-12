@@ -26,6 +26,10 @@ Template.keynoteEdit.themeOptions = function () {
   return __.selectOptions(__.keynotes.themes, this.theme);
 }
 
+Template.keynoteEdit.themeHelp = function (theme) {
+  return __.keynotes.themes[theme].help;
+}
+
 Template.keynoteEdit.url = function () {
   return Session.get('keynoteURL') || this.url || this._id;
 }

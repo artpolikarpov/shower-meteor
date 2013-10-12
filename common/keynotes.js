@@ -22,7 +22,20 @@ if (Meteor.isServer) {
 
 __.keynotes = {};
 
-__.keynotes.themes = {'Ribbon': 'ribbon', 'Bright': 'bright'};
+__.keynotes.themes = {
+  'bootstrap-3': {
+    name: 'Bootstrap 3',
+    help: 'Use any Bootstrap <nobr><a href="http://getbootstrap.com/css/" target="_blank">elements</a></nobr> <nobr>and <a href="http://getbootstrap.com/components/" target="_blank">components</a></nobr> within slides.'
+  },
+  'ribbon': {
+    name: 'Ribbon',
+    help: 'Original Shower theme. More details in the <a href="https://github.com/shower/ribbon" target="_blank">Ribbon GitHub repository</a>.'
+  },
+  'bright': {
+    name: 'Bright',
+    help: 'Original Shower theme. More details in the <a href="https://github.com/shower/bright" target="_blank">Bright GitHub repository</a>.'
+  }
+};
 
 __.keynotes.emptySlide = function () {
   return {code: '', class: ''};

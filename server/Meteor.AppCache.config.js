@@ -1,3 +1,4 @@
+/*
 Meteor.startup(function () {
   Meteor.AppCache.config({
     onlineOnly: [
@@ -9,3 +10,4 @@ Meteor.startup(function () {
     ]
   });
 });
+*/

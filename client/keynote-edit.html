@@ -43,15 +43,16 @@
 
       <div class="form-group">
         <label class="control-label">Theme</label>
-        <div>
+        <div class="form-group">
           <div class="btn-group" data-toggle="buttons">
             {{#each themeOptions}}
               <label class="btn btn-default {{active}}">
-                <input type="radio" value="{{value}}" name="theme" {{checked}}> {{key}}
+                <input type="radio" value="{{key}}" name="theme" {{checked}}> {{value.name}}
               </label>
             {{/each}}
           </div>
         </div>
+        <p><em>{{{themeHelp theme}}}</em></p>
       </div>
 
       {{#each slides}}
