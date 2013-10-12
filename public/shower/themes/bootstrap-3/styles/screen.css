@@ -6569,6 +6569,30 @@ h6:first-child,
   height: 575px;
 }
 
+.slide.scale-0-5 > div {
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+  max-width: 1700px;
+  max-height: 1150px;
+  padding: 100px 150px 0 150px;
+}
+
+.slide.scale-0-75 > div {
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scale(0.75);
+  -ms-transform: scale(0.75);
+  transform: scale(0.75);
+  max-width: 1133.33333px;
+  max-height: 766.66667px;
+  padding: 66.66667px 100px 0 100px;
+}
+
 .slide.scale-1-5 > div {
   -webkit-transform-origin: 0 0;
   -ms-transform-origin: 0 0;
@@ -6696,6 +6720,20 @@ h6:first-child,
   transform-origin: 50% 50%;
   width: auto;
   height: auto;
+}
+
+.slide.shout.scale-0-5 > div {
+  -webkit-transform: translate(-50%, -50%) scale(0.5);
+  -ms-transform: translate(-50%, -50%) scale(0.5);
+  transform: translate(-50%, -50%) scale(0.5);
+  padding: 100px;
+}
+
+.slide.shout.scale-0-75 > div {
+  -webkit-transform: translate(-50%, -50%) scale(0.75);
+  -ms-transform: translate(-50%, -50%) scale(0.75);
+  transform: translate(-50%, -50%) scale(0.75);
+  padding: 66.66667px;
 }
 
 .slide.shout.scale-1 > div {

@@ -9,8 +9,8 @@
 			</div>
 
       <div class="form-group">
-        <label for="tagline" class="control-label">Tagline</label>
-        <input id="tagline" type="text" class="form-control" name="tagline" value="{{tagline}}" />
+        <label for="description" class="control-label">Description</label>
+        <textarea id="description" class="form-control" name="description" rows="3" value="{{description}}" placeholder="Markdown or HTML" />
 			</div>
 
       <div class="form-group {{Session 'keynoteURLState'}}">
@@ -83,13 +83,13 @@
   <div class="one-slide form-group {{focus}}">
     <div class="form-group">
       <label class="control-label" for="slides__{{i}}__code">Slide {{no}}</label>
-      <textarea id="slides__{{i}}__code" name="slides__{{i}}__code" class="form-control" cols="30" rows="10" placeholder="Markdown or HTML">{{code}}</textarea>
+      <textarea id="slides__{{i}}__code" name="slides__{{i}}__code" class="form-control" rows="10" placeholder="Markdown or HTML">{{code}}</textarea>
     </div>
 
     <div class="form-group row">
       <div class="form-group col-xs-6">
-        <label class="sr-only" for="slides__{{i}}__class">Additional classes for the slide</label>
-        <input class="form-control" id="slides__{{i}}__class" name="slides__{{i}}__class" value="{{class}}" placeholder="Additional classes for the slide" />
+        <label class="sr-only" for="slides__{{i}}__class">Classes for the slide</label>
+        <input class="form-control" id="slides__{{i}}__class" name="slides__{{i}}__class" value="{{class}}" placeholder="Classes for the slide" />
       </div>
       <div class="form-group slide-buttons pull-right">
         <div class="btn-group">

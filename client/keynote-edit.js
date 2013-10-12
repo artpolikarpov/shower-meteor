@@ -161,7 +161,7 @@ Template.keynoteEdit.events({
 });
 
 Template.keynoteEditSlide.events({
-  'click textarea, focus textarea': function () {
+  'click, focus': function () {
     var _keynote = keynote();
 
 
@@ -173,6 +173,7 @@ Template.keynoteEditSlide.events({
   },
   'click .js-move-slide': function (e) {
     e.preventDefault();
+    e.stopPropagation();
 
     var _keynote = keynote(),
         $set = {},

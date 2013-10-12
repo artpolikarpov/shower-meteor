@@ -12,6 +12,10 @@ body.full .slide.active {
   margin: 0 !important;
 }
 
+body.list > div.progress {
+  display: none;
+}
+
 .slide p:empty,
 body.guest .slide:not(.active) {
   display: none;

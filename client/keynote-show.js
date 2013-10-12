@@ -95,7 +95,7 @@ Template.keynoteShow.rendered = function () {
     _currentSlide && shower.updateProgress(_currentSlide.currentSlide, _keynote.slides.length);
   } else {
     __.$body
-        .removeClass('full')
+        .removeClass('full guest')
         .addClass('list');
 
     shower.guest = false;
