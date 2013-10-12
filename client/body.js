@@ -58,9 +58,5 @@ Template.body.rendered = function () {
     __.$html.addClass('bootstrap');
   }
 
-  $('.js-over-clipboard').tooltip({
-    title: 'Press ' + __.ctrlLabel + ' + C to copy'
-  });
-
   Session.set('keynoteShow', __.pathname());
 }
