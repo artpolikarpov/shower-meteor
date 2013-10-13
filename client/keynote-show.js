@@ -65,8 +65,11 @@ Template.keynoteShow.rendered = function () {
       .attr('disabled', true);
 
   __.waitFor(function () {
-      var $slide = $('.slide.active'),
-          ratio = $slide.width() / $slide.height();
+      var $slide = $('.slide.active');
+
+      if (!$slide.length) $slide = $('.slide').eq(0);
+
+      var ratio = $slide.width() / $slide.height();
       return (ratio === 16 / 10 || ratio === 4 / 3);
   }, function () {
     $('head > link[rel="stylesheet"]').attr('disabled', true);
