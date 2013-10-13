@@ -208,6 +208,7 @@ Template.keynoteEdit.events({
 
     Session.set('keynoteSlideFocus', newIndex);
     Keynotes.update(_keynote._id, {$set: $set});
+    Meteor.call('updateCurrentSlide', _keynote._id, newIndex);
   }
 });
 
