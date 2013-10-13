@@ -136,6 +136,7 @@ Template.keynoteEdit.events({
     Session.set('keynoteSlideFocus', newIndex);
     Keynotes.update(_keynote._id, {$set: $set});
     Meteor.call('updateCurrentSlide', _keynote._id, newIndex);
+    Session.set('keynoteCurrentSlideNumber', newIndex);
   },
   'click .js-to-remove-slide': function (e) {
     //console.log('click .js-to-remove-slide', this, this.i);
@@ -209,6 +210,7 @@ Template.keynoteEdit.events({
     Session.set('keynoteSlideFocus', newIndex);
     Keynotes.update(_keynote._id, {$set: $set});
     Meteor.call('updateCurrentSlide', _keynote._id, newIndex);
+    Session.set('keynoteCurrentSlideNumber', newIndex);
   }
 });
 
