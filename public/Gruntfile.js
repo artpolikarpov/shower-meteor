@@ -48,7 +48,7 @@ module.exports = function (grunt) {
           "Expires": new Date(Date.now() + 63072000000).toUTCString()
         }
       },
-      themes: {
+      bootstrap: {
         upload: [
           {
             src: 'shower/themes/*',
@@ -62,6 +62,14 @@ module.exports = function (grunt) {
           {
             src: 'shower/themes/bootstrap-3/styles/*.css',
             dest: '/bootstrap-3/styles/'
+          }
+        ]
+      },
+      bright: {
+        upload: [
+          {
+            src: 'shower/themes/*',
+            dest: '/'
           },
 
           // Bright
@@ -76,6 +84,28 @@ module.exports = function (grunt) {
           {
             src: 'shower/themes/bright/styles/*.css',
             dest: '/bright/styles/'
+          },
+
+          // Ribbon
+          {
+            src: 'shower/themes/ribbon/fonts/*',
+            dest: '/ribbon/fonts/'
+          },
+          {
+            src: 'shower/themes/ribbon/images/*',
+            dest: '/ribbon/images/'
+          },
+          {
+            src: 'shower/themes/ribbon/styles/*.css',
+            dest: '/ribbon/styles/'
+          }
+        ]
+      },
+      ribbon: {
+        upload: [
+          {
+            src: 'shower/themes/*',
+            dest: '/'
           },
 
           // Ribbon

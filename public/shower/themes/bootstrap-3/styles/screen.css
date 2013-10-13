@@ -6538,8 +6538,6 @@ h6:first-child,
   position: relative;
   width: 1000px;
   height: 625px;
-  color: black;
-  background: white;
   -webkit-print-color-adjust: exact;
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
@@ -6965,6 +6963,7 @@ h6:first-child,
     height: 4px;
     margin: 0;
     border-radius: 0;
+    background: none;
   }
 
   .full > .progress div {
