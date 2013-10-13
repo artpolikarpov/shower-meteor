@@ -131,13 +131,13 @@ Template.keynoteEdit.events({
     slides.splice(newIndex, 0, __.keynotes.emptySlide());
     $set.slides = slides;
 
-    console.log('newIndex', newIndex);
+    //console.log('newIndex', newIndex);
 
     Session.set('keynoteSlideFocus', newIndex);
     Keynotes.update(_keynote._id, {$set: $set});
   },
   'click .js-to-remove-slide': function (e) {
-    console.log('click .js-to-remove-slide', this, this.i);
+    //console.log('click .js-to-remove-slide', this, this.i);
 
     e.preventDefault();
     e.stopPropagation();
