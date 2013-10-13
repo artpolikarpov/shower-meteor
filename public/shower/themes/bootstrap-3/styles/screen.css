@@ -6538,6 +6538,7 @@ h6:first-child,
   position: relative;
   width: 1000px;
   height: 625px;
+  background: white;
   -webkit-print-color-adjust: exact;
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
