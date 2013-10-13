@@ -55,20 +55,19 @@ h1, h2, h3, h4, h5, h6,
 
   > div {
     position: absolute;
+    transform-origin: 0 0;
     top: 0;
     left: 0;
     overflow: hidden;
-    padding: $slide-gap $slide-gap*1.5 0 $slide-gap*1.5;
-    width: $inner-width;
-    height: $inner-height;
+    width: $width - $slide-gap*3;
+    height: $height - $slide-gap;
   }
 
   @mixin scale ($n) {
     > div {
-      transform-origin: 0 0;
       transform: scale($n);
-      max-width: $inner-width / $n;
-      max-height: $inner-height / $n;
+      max-width: $width/$n - $slide-gap*(3/$n);
+      max-height: $height/$n - $slide-gap*(1/$n);
       padding: $slide-gap*(1/$n) $slide-gap*(1.5/$n) 0 $slide-gap*(1.5/$n);
     }
   }
@@ -80,6 +79,8 @@ h1, h2, h3, h4, h5, h6,
   &.scale-0-75 {
     @include scale(.75);
   }
+
+  @include scale(1);
 
   &.scale-1-5 {
     @include scale(1.5);
@@ -163,11 +164,12 @@ h1, h2, h3, h4, h5, h6,
     @mixin scale ($n: 1) {
       > div {
         transform: translate(-50%, -50%) scale($n);
+        max-width: $width/$n - $slide-gap*(2/$n);
+        max-height: $height/$n - $slide-gap*(2/$n);
         padding: $slide-gap / $n;
       }
     }
     > div {
-      position: absolute;
       top: 50%;
       left: 50%;
       transform-origin: 50% 50%;
@@ -273,7 +275,6 @@ h1, h2, h3, h4, h5, h6,
       top: $height/2 - $list-gap;
       display: inline-block;
       margin: ($list-gap - $height/2) ($list-gap - $width/2) 0 0;
-      text-align: left;
       transform-origin: 0 0;
       transform: scale(0.5);
       @media (max-width: $break) {
