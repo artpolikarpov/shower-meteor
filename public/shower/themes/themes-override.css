@@ -12,11 +12,13 @@ body.full .slide.active {
   margin: 0 !important;
 }
 
-body.list > div.progress {
+body.list > div.progress,
+.slide p:empty {
   display: none;
 }
 
-.slide p:empty,
 body.guest .slide:not(.active) {
-  display: none;
+  visibility: hidden;
+  width: 0;
+  height: 0;
 }
