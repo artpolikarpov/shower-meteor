@@ -31,6 +31,7 @@ h1, h2, h3, h4, h5, h6,
   position: relative;
   width: $width;
   height: $height;
+  background: $body-bg;
   -webkit-print-color-adjust: exact;
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
