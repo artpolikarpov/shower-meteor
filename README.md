@@ -1,28 +1,24 @@
-## Requirements
+# Sho.io source
 
-You need Node.js to start server.
+[Sho.io](http://sho.io/) is an open-souce HTML presentation app.
 
-## Install
+## How to run locally
 
-First install Meteor:
-```
+You’ll need [Node.js](http://nodejs.org/download/) to start the server.
+
+Install [Meteor](http://meteor.com/):
+```bash
 curl https://install.meteor.com | /bin/sh
 ```
 
-Then install Meteorite (package manager for Meteor):
-```
+Install [Meteorite](https://atmosphere.meteor.com/wtf/app) (package manager for Meteor):
+```bash
 npm install -g meteorite
 ```
 
-Then run Meteorite to install project dependencies:
-```
-mrt
+Run from project’s root to start the server:
+```bash
+mrt -p 3333
 ```
 
-## Start server
-
-To start server simply run from project's root:
-
-```
-meteor
-```
+Open [http://localhost:3333/](http://localhost:3333/) in browser.
