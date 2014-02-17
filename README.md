@@ -1,6 +1,6 @@
 # Sho.io source
 
-[Sho.io](http://sho.io/) is an open-souce HTML presentation app.
+[Sho.io](http://sho.io/) is an HTML presentation app.
 
 ## How to run locally
 
