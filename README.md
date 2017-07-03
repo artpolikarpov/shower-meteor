@@ -1,6 +1,12 @@
+**Attention! This repository is not currently maintained, and is kept for historical purpose only. Fork your copy away!**
+
+_Thanks everyone for support <3_
+
+:lock::lock::lock:
+
 # Sho.io source
 
-[Sho.io](http://sho.io/) is an HTML presentation app.
+Sho.io is an HTML presentation app.
 
 ## How to run locally
 
